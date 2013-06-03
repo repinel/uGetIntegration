@@ -15,18 +15,18 @@
 // limitations under the License.
 
 // global options
-var options = [["downloadManagerPath", "download_manager_path", "/usr/bin/wget"],
-	["downloadManagerParameters", "download_manager_parameters", "[SG_URL] -P [SG_DESTINATION]"],
-	["downloadDestination", "download_destination", "/home/user/downloads"]];
+var options = [["downloadManagerPath", "download_manager_path", "/usr/bin/uget-gtk"],
+	["downloadManagerParameters", "download_manager_parameters", "[URL]"],
+	["downloadDestination", "download_destination", ""]];
 
 // Set the default options when installed
 function set_first_time()
 {
 	for (var i = 0; i < options.length; i++)
 	{
-		if (!localStorage[options[i][1]])
+		if (!chrome.storage.local.set[options[i][1]])
 		{
-			localStorage[options[i][1]] = options[i][2];
+			chrome.storage.local.set[options[i][1]] = options[i][2];
 
 			console.log(options[i][0] + " initial value : " + options[i][2]);
 		}
@@ -40,7 +40,7 @@ function default_options()
 	{
 		document.getElementById(options[i][0]).value = options[i][2];
 
-		localStorage[options[i][1]] = options[i][2];
+		chrome.storage.local.set[options[i][1]] = options[i][2];
 
 		console.log(options[i][0] + " restored: " + options[i][2]);
 	}
@@ -48,21 +48,21 @@ function default_options()
 	// Update status to let user know options were saved.
 	var status = document.getElementById("status");
 
-	status.innerHTML = "Options Restored to Defaults";
+	status.innerHTML = "<div class='inner'>uGet Integration Settings have been reset to the Defaults</div>";
 
 	setTimeout(function() {
 		status.innerHTML = "";
-	}, 900);
+	}, 1900);
 }
 
-// Saves options to localStorage.
+// Saves options to chrome.storage.local.set.
 function save_options()
 {
 	for (var i = 0; i < options.length; i++)
 	{
 		var value = document.getElementById(options[i][0]).value;
 
-		localStorage[options[i][1]] = value;
+		chrome.storage.local.set[options[i][1]] = value;
 
 		console.log(options[i][0] + " stored: " + value);
 	}
@@ -70,19 +70,19 @@ function save_options()
 	// Update status to let user know options were saved.
 	var status = document.getElementById("status");
 
-	status.innerHTML = "Options Saved";
+	status.innerHTML = "<div class='inner'>uGet Integration Settings - Saved Successfully</div>";
 
 	setTimeout(function() {
 		status.innerHTML = "";
-	}, 900);
+	}, 1900);
 }
 
-// Restores select box state to saved value from localStorage.
+// Restores select box state to saved value from chrome.storage.local.set.
 function restore_options()
 {
 	for (var i = 0; i < options.length; i++)
 	{
-		var value = localStorage[options[i][1]];
+		var value = chrome.storage.local.set[options[i][1]];
 
 		if (!value)
 		{

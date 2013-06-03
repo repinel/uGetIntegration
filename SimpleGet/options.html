@@ -16,146 +16,60 @@
 
 <html>
 	<head>
-		<title>Simple Get - Options</title>
+		<title>uGet Integration Options</title>
 	</head>
 
 	<script type="text/javascript" src="options.js"></script>
 	
 	<style type="text/css" media="screen">
-		body
-		{
-			width: 540px;
-			margin: 10px auto;
-			font: normal 13px "Trebuchet MS", Arial, Helvetica, sans-serif;
-		}
-
-		#title
-		{
-			text-align: center;
-		}
-
-		#status
-		{
-			text-align: center;
-			color: green;
-		}
-
-			/* ---- options ---- */
-
-		.options
-		{
-			clear: both;
-			padding: 20px 0 20px 0;
-		}
-		
-		.options fieldset
-		{
-			background: #b5b5b5;
-		}
-
-		.options h3
-		{
-			text-align: center;
-		}
-		
-		.options fieldset table
-		{
-			margin-top: 4px;
-			margin-bottom: 4px;
-		}
-
-		.options fieldset td
-		{
-			padding: 5px;
-		}
-
-		.options fieldset td label
-		{
-			font-size:90%;
-		}
-
-		.options fieldset td input
-		{
-			width: 400px;
-		}
-
-		.options fieldset td textarea
-		{
-			width: 500px;
-			height: 60px;
-			resize: none;
-		}
-
-			/* ---- example ---- */
-
-		.example
-		{
-			font-size: 80%;
-			color: #555;
-			margin-left:20px;
-			width: 400px;
-		}
-
-				/* ---- credits ---- */
-
-		.credits
-		{
-			text-align: right;
-		}
+		body {padding:0;margin:0;height:100%;color:#3c3d36;font: normal 14px "Trebuchet MS", Arial, Helvetica, sans-serif;background: #e3e3e3;background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#e3e3e3));background: -webkit-linear-gradient(top,  #eeeeee 0%,#e3e3e3 100%);background: linear-gradient(to bottom,  #eeeeee 0%,#e3e3e3 100%);}
+		#wrapper {width: 540px;margin: 0 auto;padding:20px 0 0 0;}
+		#logo {display:block;width:191px;float:left;margin:10px 20px 20px 80px;}
+		#title {padding:5px 0 0 0;color:#696969;}
+		#status .inner {text-align: center;background:#C1E5AE;border:1px solid #4B9E21;padding:10px;width:80%;margin:0 auto;clear:both;}
+		.options{clear: both;padding:0;margin:20px 0;}
+		.options fieldset {border:1px solid #ccc;padding:20px;border-radius:20px;box-shadow:0px 0px 5px rgba(0,0,0,0.25);background: #f2f2f2;background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fafafa), color-stop(100%,#f2f2f2));background: -webkit-linear-gradient(top,  #fafafa 0%,#f2f2f2 100%);background: linear-gradient(to bottom,  #fafafa 0%,#f2f2f2 100%);}
+		.options h3 {text-align: center;}
+		.options fieldset label {width:20%;float:left;padding:5px 0 0 0;}
+		.options fieldset input {width: 80%;margin:0 0 15px 0;background:#eee;border:1px solid #ddd;border-radius:5px;box-shadow:1px 1px 2px rgba(0,0,0,0.3) inset;padding:5px 10px;}
+		.options fieldset textarea {width: 80%;height: 50px;resize: none;background:#eee;border:1px solid #ddd;border-radius:5px;box-shadow:1px 1px 2px rgba(0,0,0,0.3) inset;padding:5px 10px;}
+		.options fieldset input:focus, .options fieldset textarea:focus {outline:0;border:1px solid #3A7E19;background:#f3f3f3;}
+		.example {font-size: 80%;color: #555;margin-left:20px;width: 78%;float:right;margin:10px 0 20px 0;}
+		.reset {float:right;cursor:pointer;border-radius:10px;border:1px solid #aaa;padding:5px 10px;color:#666;font-size:14px;box-shadow:0px 0px 5px rgba(0,0,0,0.1);background: #ccc;}
+		.reset:hover, .reset:focus {background:#aaa;color:#333;border:1px solid #777;outline:0;}
+		.save {float:right;cursor:pointer;border-radius:10px;padding:5px 15px;margin:0 0 0 20px;color:#eee;text-shadow:1px 1px 2px rgba(0,0,0,0.4);font-size:18px;border:0;box-shadow:0px 0px 5px rgba(0,0,0,0.3);background: #3A7E19;background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#488A24), color-stop(100%,#3A7E19));background: -webkit-linear-gradient(top,  #488A24 0%,#3A7E19 100%);background: linear-gradient(to bottom,  #488A24 0%,#3A7E19 100%);}
+		.save:hover, .save:focus {outline:0;background: #3A7E19;background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6AB43E), color-stop(100%,#47971F));background: -webkit-linear-gradient(top,  #6AB43E 0%,#47971F 100%);background: linear-gradient(to bottom,  #6AB43E 0%,#3A7E19 100%);}
+		#credits {padding:0 20px;color:#3c3d36;}
+		#credits a:link, #credits a:visited {text-decoration:underline;color:#3c3d36;}
+		#credits a:hover, #credits a:active, #credits a:focus {text-decoration:normal;color:#4B9E21;outline:0;}
+		#credits .uget {float:left;text-align:left;}
+		#credits .sg {float:right;text-align:right;}
 	</style>
 
 	<body onload="restore_options()">
-
-		<h1 id="title">Simple Get - Options</h1>
-
-		<div id="status"></div>
-
-		<div class="options">
-			<fieldset>
-				<h3>Download Manager</h3>
-				<table aling="center">
-					<tr>
-						<td><label>Path:</label></td>
-						<td><input id="downloadManagerPath" type="text"></td>
-					</tr>
-					<tr>
-						<td><label>Parameters:</label></td>
-						<td>&nbsp;</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<textarea id="downloadManagerParameters"></textarea>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<div class="example">
-								e.g. /usr/bin/wget "http://foo.com/foo.txt" -P "/home/user/downloads"<br>
-								Parameters should be:<br>
-								[SG_URL] -P [SG_DESTINATION]<br>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td><label>Destination:</label></td>
-						<td><input id="downloadDestination" type="text"></td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td align="right">
-							<button onclick="default_options()">Restore to Defaults</button>
-							<button onclick="save_options()">Save</button>
-						</td>
-					</tr>
-				</table>
-			</fieldset>
-		</div>
-
-		<div class="credits">
-			<span>
-				SimpleGet 2.3 - Copyright &copy; 2011 Roque Pinel<br>
-				<a href="LICENSE-2.0.txt">Licensed under the Apache License, Version 2.0</a>
-			</span>
+		<div id="wrapper">
+			<img id="logo" src="uGet_logo.png" />
+			<h1 id="title">Integration<br />Options</h1>
+			<div id="status"></div>
+			<div class="options">
+				<fieldset>
+					<label>App Path:</label><input id="downloadManagerPath" type="text">
+					<label>Folder Path:</label><input id="downloadDestination" type="text">
+					<label>Parameters:</label><textarea id="downloadManagerParameters"></textarea>
+					<div class="example">
+						<strong>Quiet Mode</strong>: --quiet [URL]<br />
+						skips download dialog, starts the download immediately.<br /><br />
+						<strong>Download Direct to a Folder</strong>: --folder [FOLDER] [URL]<br />
+						Add a value similar to "/home/user/Downloads" (without quotes) in the Destination field.<br />
+					</div>
+					<button class="save" onclick="save_options()">Save Settings</button>
+					<button class="reset" onclick="default_options()">Reset</button>
+				</fieldset>
+			</div>
+			<div id="credits">
+				<div class="uget">uGet Integration 1.0.0<br />&copy; 2013 <a href="http://michaeltunnell.com">Michael Tunnell</a> &amp; <a href="http://uget.visuex.com">uGet</a></div>
+				<div class="sg">SimpleGet 2.3.0<br />&copy; 2011 <a href="http://pinel.cc/en/">Roque Pinel</a></div>
+			</div>
 		</div>
 	</body>
 </html>

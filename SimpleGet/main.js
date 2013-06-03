@@ -18,16 +18,16 @@ function downloadURL (url)
 {
 	console.log("URL: " + url);
 	
-	var application = localStorage["download_manager_path"];
-	var parameters = localStorage["download_manager_parameters"];
-	var destination = localStorage["download_destination"];
+	var application = chrome.storage.local.get["download_manager_path"];
+	var parameters = chrome.storage.local.get["download_manager_parameters"];
+	var destination = chrome.storage.local.get["download_destination"];
 
 	console.log("DownloadMangerPath: " + application);
 	console.log("DownloadMangerParameters: " + parameters);
 	console.log("DownloadDestination: " + destination);
 
-	parameters = parameters.replace("[SG_URL]", '"' + url + '"');
-	parameters = parameters.replace("[SG_DESTINATION]", '"' + destination + '"');
+	parameters = parameters.replace("[URL]", '"' + url + '"');
+	parameters = parameters.replace("[FOLDER]", '"' + destination + '"');
 
 	sg.callApplication(application, parameters);
 }
@@ -48,7 +48,7 @@ function downloadAllOnClick (info, tab)
 
 /* creating the context menu */
 
-var options = [["Download link", ["link"], downloadLinkOnClick], ["Download all", ["page"], downloadAllOnClick]];
+var options = [["uGet Link", ["link"], downloadLinkOnClick], ["uGet All Links", ["page"], downloadAllOnClick]];
 
 for (var i = 0; i < options.length; i++)
 {

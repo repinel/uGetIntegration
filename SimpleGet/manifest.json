@@ -1,21 +1,24 @@
 {
-	"name": "Simple Get",
-	"description": "Send the link to an external download manager.",
-	"version": "2.3",
+	"name": "uGet Integration",
+	"description": "Sends a link or group of links to the uGet download manager. uGet and this extensions are compatible with Linux & Windows.",
+	"version": "1.0.0",
+	"manifest_version": 2,
 
-	"homepage_url": "http://simple-get.googlecode.com",
+	"homepage_url": "http://uget.visuex.com/extchrome",
 	"update_url": "http://pinel.cc/files/simple-get/updates.xml",
 
-	"permissions": ["contextMenus", "tabs", "http://*/*",
+	"permissions": ["contextMenus", "tabs", "storage", "http://*/*",
 					"https://*/*", "ftp://*/*", "file:///*/*"],
 
 	"options_page": "options.html",
 
-	"background_page": "background.html",
+	"background": {
+		"page": "background.html"
+	},
 
 	"icons": {
-		"32": "simpleget_32.png",
-		"48": "simpleget_48.png"
+		"32": "uGet_32.png",
+		"48": "uGet_48.png"
 	},
 
 	"plugins": [
