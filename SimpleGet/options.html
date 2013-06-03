@@ -46,24 +46,24 @@
 		#credits .sg {float:right;text-align:right;}
 	</style>
 
-	<body onload="restore_options()">
+	<body id="download_options">
 		<div id="wrapper">
 			<img id="logo" src="uGet_logo.png" />
 			<h1 id="title">Integration<br />Options</h1>
 			<div id="status"></div>
 			<div class="options">
 				<fieldset>
-					<label>App Path:</label><input id="downloadManagerPath" type="text">
-					<label>Folder Path:</label><input id="downloadDestination" type="text">
-					<label>Parameters:</label><textarea id="downloadManagerParameters"></textarea>
+					<label>App Path:</label><input id="download_manager_path" type="text">
+					<label>Folder Path:</label><input id="download_destination" type="text">
+					<label>Parameters:</label><textarea id="download_manager_parameters"></textarea>
 					<div class="example">
 						<strong>Quiet Mode</strong>: --quiet [URL]<br />
 						skips download dialog, starts the download immediately.<br /><br />
 						<strong>Download Direct to a Folder</strong>: --folder [FOLDER] [URL]<br />
 						Add a value similar to "/home/user/Downloads" (without quotes) in the Destination field.<br />
 					</div>
-					<button class="save" onclick="save_options()">Save Settings</button>
-					<button class="reset" onclick="default_options()">Reset</button>
+					<button class="save" id="save">Save Settings</button>
+					<button class="reset" id="reset">Reset</button>
 				</fieldset>
 			</div>
 			<div id="credits">
@@ -73,4 +73,5 @@
 		</div>
 	</body>
 </html>
+
 

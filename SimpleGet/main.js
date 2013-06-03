@@ -14,87 +14,87 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-function downloadURL (url)
-{
-	console.log("URL: " + url);
-	
-	var application = chrome.storage.local.get["download_manager_path"];
-	var parameters = chrome.storage.local.get["download_manager_parameters"];
-	var destination = chrome.storage.local.get["download_destination"];
+Main = {
+	downloadURL: function(url) {
+		console.log("URL: " + url);
 
-	console.log("DownloadMangerPath: " + application);
-	console.log("DownloadMangerParameters: " + parameters);
-	console.log("DownloadDestination: " + destination);
+		var application = chrome.storage.local.get["download_manager_path"];
+		var parameters = chrome.storage.local.get["download_manager_parameters"];
+		var destination = chrome.storage.local.get["download_destination"];
 
-	parameters = parameters.replace("[URL]", '"' + url + '"');
-	parameters = parameters.replace("[FOLDER]", '"' + destination + '"');
+		console.log("DownloadMangerPath: " + application);
+		console.log("DownloadMangerParameters: " + parameters);
+		console.log("DownloadDestination: " + destination);
 
-	sg.callApplication(application, parameters);
-}
+		parameters = parameters.replace("[URL]", '"' + url + '"');
+		parameters = parameters.replace("[FOLDER]", '"' + destination + '"');
 
-function downloadLinkOnClick (info, tab)
-{
-	console.log("DownloadLink: " + info.menuItemId + " was clicked.");
+		Background.sg.callApplication(application, parameters);
+	},
 
-	downloadURL(info.linkUrl);
-}
+	downloadLinkOnClick: function(info, tab) {
+		console.log("DownloadLink: " + info.menuItemId + " was clicked.");
 
-function downloadAllOnClick (info, tab)
-{
-	console.log("DownloadAll: " + info.menuItemId + " was clicked.");
+		downloadURL(info.linkUrl);
+	},
 
-	chrome.tabs.executeScript(null,	{file: "download_all.js"});
-}
+	downloadAllOnClick: function(info, tab) {
+		console.log("DownloadAll: " + info.menuItemId + " was clicked.");
+
+		chrome.tabs.executeScript(null, { file: "download_all.js" });
+	}
+};
+
+Menu = {
+	options: [
+		["uGet Link", ["link"], Main.downloadLinkOnClick],
+		["uGet All Links", ["page"], Main.downloadAllOnClick]
+	],
+};
+
 
 /* creating the context menu */
 
-var options = [["uGet Link", ["link"], downloadLinkOnClick], ["uGet All Links", ["page"], downloadAllOnClick]];
+for (var i = 0; i < Menu.options.length; i++) {
+	var id = chrome.contextMenus.create({
+		"title": Menu.options[i][0],
+		"contexts": Menu.options[i][1],
+		"onclick": Menu.options[i][2]
+	});
 
-for (var i = 0; i < options.length; i++)
-{
-	var id = chrome.contextMenus.create({"title": options[i][0], "contexts": options[i][1],
-	                                    "onclick": options[i][2]});
-
-	console.log("'" + options[i][0] + "' item:" + id);
-}downloadURL
+	console.log("'" + Menu.options[i][0] + "' item: " + id);
+}
 
 //var links = [];
 var linksStr = "";
 
 chrome.extension.onConnect.addListener(
-	function(port)
-	{
+	function(port) {
 		port.onMessage.addListener(
-			function(msg)
-			{
+			function(msg) {
 				console.log("Connection type: " + msg.type);
 
-				if (msg.type == "setLinks")
-				{
+				if (msg.type == "setLinks") {
 					linksStr = msg.links;
 					
-					var popup = window.open("donwload_all_popup.html",
+					var popup = window.open(
+						"donwload_all_popup.html",
 						'Download All - Selection',
-						'width = 725, height = 385, resizable = 0, toolbar = no, menubar = no, status = no, scrollbars = no');
+						'width = 725, height = 385, resizable = 0, toolbar = no, menubar = no, status = no, scrollbars = no'
+					);
 
 					// ensure that the focus was changed
-					if (window.focus)
-					{
+					if (window.focus) {
 						popup.focus();
 					}
-				}
-				else if (msg.type == "getLinks")
-				{
+				} else if (msg.type == "getLinks") {
 					port.postMessage({links: linksStr});
-				}
-				else if (msg.type == "downloadLinks")
-				{
+				} else if (msg.type == "downloadLinks") {
 					links = JSON.parse(msg.links);
 
 					console.log(links.length + " links returned");
 
-					for (var i = 0; i < links.length; i++)
-					{
+					for (var i = 0; i < links.length; i++) {
 						downloadURL(links[i]);
 					}
 				}
@@ -102,5 +102,6 @@ chrome.extension.onConnect.addListener(
 		);
 	}
 );
+
 
 

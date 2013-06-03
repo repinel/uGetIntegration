@@ -14,87 +14,114 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// global options
-var options = [["downloadManagerPath", "download_manager_path", "/usr/bin/uget-gtk"],
-	["downloadManagerParameters", "download_manager_parameters", "[URL]"],
-	["downloadDestination", "download_destination", ""]];
+Options = {
+	// global options
+	values: {
+		download_manager_path: "/usr/bin/uget-gtk",
+		download_manager_parameters: "[URL]",
+		download_destination: ""
+	},
 
-// Set the default options when installed
-function set_first_time()
-{
-	for (var i = 0; i < options.length; i++)
-	{
-		if (!chrome.storage.local.set[options[i][1]])
-		{
-			chrome.storage.local.set[options[i][1]] = options[i][2];
-
-			console.log(options[i][0] + " initial value : " + options[i][2]);
+	getKeys: function() {
+		var keys = [];
+		for (var key in Options.values) {
+			keys.push(key);
 		}
-	}
-}
+		return keys;
+	},
 
-// Restore to defaults.
-function default_options()
-{
-	for (var i = 0; i < options.length; i++)
-	{
-		document.getElementById(options[i][0]).value = options[i][2];
+	getStorage: function() {
+		return chrome.storage.local;
+	},
 
-		chrome.storage.local.set[options[i][1]] = options[i][2];
+	// Set the default options when installed
+	setFirstTime: function() {
+		Options.getStorage().get(Options.getKeys(), function(items) {
+			for (var key in Options.values) {
+				if (!items[key]) {
+					Options.restoreOptions(true);
+					break;
+				}
+			}
+		});
+	},
 
-		console.log(options[i][0] + " restored: " + options[i][2]);
-	}
+	// Restore to defaults.
+	defaultOptions: function() {
+		Options.getStorage().set(Options.values, function() {
+			for (var key in Options.values) {
+				document.querySelector("#download_options #" + key).value = Options.values[key];
+				console.log(key + " restored: " + Options.values[key]);
+			}
+			Options.setStatus("uGet Integration Settings have been reset to the Defaults");
+		});
+	},
 
-	// Update status to let user know options were saved.
-	var status = document.getElementById("status");
-
-	status.innerHTML = "<div class='inner'>uGet Integration Settings have been reset to the Defaults</div>";
-
-	setTimeout(function() {
-		status.innerHTML = "";
-	}, 1900);
-}
-
-// Saves options to chrome.storage.local.set.
-function save_options()
-{
-	for (var i = 0; i < options.length; i++)
-	{
-		var value = document.getElementById(options[i][0]).value;
-
-		chrome.storage.local.set[options[i][1]] = value;
-
-		console.log(options[i][0] + " stored: " + value);
-	}
-
-	// Update status to let user know options were saved.
-	var status = document.getElementById("status");
-
-	status.innerHTML = "<div class='inner'>uGet Integration Settings - Saved Successfully</div>";
-
-	setTimeout(function() {
-		status.innerHTML = "";
-	}, 1900);
-}
-
-// Restores select box state to saved value from chrome.storage.local.set.
-function restore_options()
-{
-	for (var i = 0; i < options.length; i++)
-	{
-		var value = chrome.storage.local.set[options[i][1]];
-
-		if (!value)
-		{
-			// first time, using default.
-			value = options[i][2];
+	// Saves options to chrome.storage.local.set.
+	saveOptions: function() {
+		var newValues = {};
+		for (var key in Options.values) {
+			newValues[key] = document.querySelector("#download_options #" + key).value;
 		}
 
-		var item = document.getElementById(options[i][0]);
+		Options.getStorage().set(newValues, function() {
+			for (var key in Options.values) {
+				console.log(key + " stored: " + newValues[key]);
+			}
 
-		item.value = value;
+			Options.setStatus("uGet Integration Settings - Saved Successfully");
+		});
+	},
 
-		console.log(options[i][0] + " loaded: " + value);
+	setStatus: function(message) {
+		// Update status to let user know options were saved.
+		var status = document.querySelector("#download_options #status");
+
+		status.innerHTML = "<div class='inner'>" + message + "</div>";
+
+		setTimeout(function() {
+			status.innerHTML = "";
+		}, 1900);
+	},
+
+	// Restores select box state to saved value from chrome.storage.local.set.
+	restoreOptions: function(force) {
+		if (typeof force === "undefined") {
+			force = false;
+		}
+
+		Options.getStorage().get(Options.getKeys(), function(items) {
+			for (var key in Options.values) {
+				var value = items[key];
+
+				// first time, using default.
+				if (force || !value) {
+					value = Options.values[key];
+				}
+
+				var item = document.querySelector("#download_options #" + key);
+
+				if(item) {
+					item.value = value;
+				}
+
+				console.log(key + (force ? " initialized: " : " loaded: ") + value);
+			}
+		});
+	},
+
+	// Events
+
+	onLoad: function() {
+		if(!document.querySelector("#download_options"))
+			return;
+
+		document.querySelector("#download_options #save").addEventListener("click", Options.saveOptions);
+		document.querySelector("#download_options #reset").addEventListener("click", Options.defaultOptions);
+
+		Options.restoreOptions();
 	}
-}
+};
+
+document.addEventListener("DOMContentLoaded", Options.onLoad);
 
