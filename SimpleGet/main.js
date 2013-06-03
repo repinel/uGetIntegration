@@ -18,24 +18,26 @@ Main = {
 	downloadURL: function(url) {
 		console.log("URL: " + url);
 
-		var application = chrome.storage.local.get["download_manager_path"];
-		var parameters = chrome.storage.local.get["download_manager_parameters"];
-		var destination = chrome.storage.local.get["download_destination"];
+		Options.getStorage().get(Options.getKeys(), function(items) {
+			var application = items["download_manager_path"];
+			var parameters = items["download_manager_parameters"];
+			var destination = items["download_destination"];
 
-		console.log("DownloadMangerPath: " + application);
-		console.log("DownloadMangerParameters: " + parameters);
-		console.log("DownloadDestination: " + destination);
+			console.log("DownloadMangerPath: " + application);
+			console.log("DownloadMangerParameters: " + parameters);
+			console.log("DownloadDestination: " + destination);
 
-		parameters = parameters.replace("[URL]", '"' + url + '"');
-		parameters = parameters.replace("[FOLDER]", '"' + destination + '"');
+			parameters = parameters.replace("[URL]", '"' + url + '"');
+			parameters = parameters.replace("[FOLDER]", '"' + destination + '"');
 
-		Background.sg.callApplication(application, parameters);
+			Background.sg.callApplication(application, parameters);
+		});
 	},
 
 	downloadLinkOnClick: function(info, tab) {
 		console.log("DownloadLink: " + info.menuItemId + " was clicked.");
 
-		downloadURL(info.linkUrl);
+		Main.downloadURL(info.linkUrl);
 	},
 
 	downloadAllOnClick: function(info, tab) {
@@ -95,7 +97,7 @@ chrome.extension.onConnect.addListener(
 					console.log(links.length + " links returned");
 
 					for (var i = 0; i < links.length; i++) {
-						downloadURL(links[i]);
+						Main.downloadURL(links[i]);
 					}
 				}
 			}

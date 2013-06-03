@@ -21,9 +21,9 @@ Background = {
 		/* loading the simple get plugin */
 		var plugin = document.getElementById("simpleGetPluginId");
 
-		sg = plugin.SimpleGetPlugin();
+		Background.sg = plugin.SimpleGetPlugin();
 
-		if (sg.valid) {
+		if (Background.sg) {
 			console.log("SimpleGetPlugin: loaded.");
 		} else {
 			console.log("SimpleGetPlugin: not loaded.");
