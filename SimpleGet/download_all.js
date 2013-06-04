@@ -14,29 +14,35 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-var links = document.getElementsByTagName("a");
+DownloadAll = {
+	getAllLinksOnPage: function() {
+		var links = document.getElementsByTagName("a");
 
-var linksStr = "[";
+		var linksStr = "[";
 
-for (var i = 0; i < links.length; i++)
-{
-	// checks if is a malito
-	if (links[i].href.match("^mailto"))
-	{
-		continue;
+		for (var i = 0; i < links.length; i++) {
+			// checks if is a malito
+			if (links[i].href.match("^mailto")) {
+				continue;
+			}
+
+			linksStr += '"' + links[i].href + '",';
+		}
+
+		if (linksStr.charAt(linksStr.length - 1) == ',') {
+			linksStr = linksStr.substring(0, linksStr.length - 1);
+		}
+
+		linksStr += "]";
+
+		return linksStr;
 	}
-
-	linksStr += '"' + links[i].href + '",';
-}
-
-if (linksStr.charAt(linksStr.length - 1) == ',')
-{
-	linksStr = linksStr.substring(0, linksStr.length - 1);
-}
-
-linksStr += "]";
+};
 
 var port = chrome.extension.connect();
 
-port.postMessage({type: "setLinks", links: linksStr});
+port.postMessage({
+	type: "setLinks",
+	links: DownloadAll.getAllLinksOnPage()
+});
 

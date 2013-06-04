@@ -14,110 +14,110 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-var links = [];
+DownloadAllPopup = {
 
-function list_links()
-{
-	var port = chrome.extension.connect();
+	links: [],
 
-	port.postMessage({type: "getLinks"});
+	listLinks: function() {
+		var port = chrome.extension.connect();
 
-	port.onMessage.addListener(
-		function getResp(response)
-		{
+		port.postMessage({
+			type: "getLinks"
+		});
 
-			if (response.links)
-			{
-				links = JSON.parse(response.links);
+		port.onMessage.addListener(
+			function getResp(response) {
+				if (response.links) {
+					DownloadAllPopup.links = JSON.parse(response.links);
 
-				var linksTable = document.getElementById('linksTable');
+					var linksTable = document.getElementById('links_table');
+					var index = linksTable.rows.length;
 
-				var index = linksTable.rows.length;
+					for (var i = 0; i < DownloadAllPopup.links.length; i++) {
+						var row = linksTable.insertRow(index++);
 
-				for (var i = 0; i < links.length; i++)
-				{
-					var row = linksTable.insertRow(index++);
+						var cell1 = row.insertCell(0);
+						cell1.innerHTML = '<input type="checkbox" class="check_links" value="' + i + '" checked="checked" />';
 
-					var cell1 = row.insertCell(0);
+						var cell2 = row.insertCell(1);
+						cell2.innerHTML = '<a href="' + DownloadAllPopup.links[i] + '">' + DownloadAllPopup.links[i] + '</a>';
+					}
+				}
+			}
+		);
+	},
 
-					cell1.innerHTML = '<input type="checkbox" name="links" value="'
-										+ i + '" checked="checked"/>';
+	selectAll: function(item) {
+		var checkBoxes = document.getElementsByClassName('check_links');
+		for (var i = 0; i < checkBoxes.length; i++) {
+			checkBoxes[i].checked = item.checked;
+		}
+	},
 
-					var cell2 = row.insertCell(1);
+	evalExtensions: function(check) {
+		var extensionsStr = document.getElementById('extensions').value;
+		var extensions = extensionsStr.replace(' ', '').split(',');
+		var checkBoxes = document.getElementsByClassName('check_links');
 
-					cell2.innerHTML = '<a href="' + links[i] + '">'
-										+ links[i] + '</a>';
+		for (var i = 0; i < checkBoxes.length; i++) {
+			for (var j = 0; j < extensions.length; j++) {
+				if (extensions[j] != "" && DownloadAllPopup.links[i].match(extensions[j] + "$")) {
+					if (check) {
+						checkBoxes[i].checked = true;
+					} else {
+						checkBoxes[i].checked = false;
+					}
+					break;
 				}
 			}
 		}
-	);
-}
+	},
 
-function select_all(item)
-{
-	var checks = document.getElementsByName('links');
+	downloadAll: function() {
+		var checkBoxes = document.getElementsByClassName('check_links');
 
-	for (var i = 0; i < checks.length; i++)
-	{
-		checks[i].checked = item.checked;
-	}
-}
+		var linksStr = "[";
 
-function eval_extensions(option)
-{
-	var extensionsStr = document.getElementById('extensions').value;
-
-	var extensions = extensionsStr.replace(' ', '').split(',');
-
-	var checks = document.getElementsByName('links');
-
-	for (var i = 0; i < checks.length; i++)
-	{
-		for (var j = 0; j < extensions.length; j++)
-		{
-			if (extensions[j] != "" && links[i].match(extensions[j] + "$"))
-			{
-				if (option == "check")
-				{
-					checks[i].checked = true;
-				}
-				else
-				{
-					checks[i].checked = false;
-				}
-
-				break;
+		for (var i = 0; i < checkBoxes.length; i++) {
+			if (checkBoxes[i].checked) {
+				linksStr += '"' + DownloadAllPopup.links[i] + '",';
 			}
 		}
-	}
-}
 
-function download_all()
-{
-	var checks = document.getElementsByName('links');
-
-	var linksStr = "[";
-
-	for (var i = 0; i < checks.length; i++)
-	{
-		if (checks[i].checked)
-		{
-			linksStr += '"' + links[i] + '",';
+		if (linksStr.charAt(linksStr.length - 1) == ',') {
+			linksStr = linksStr.substring(0, linksStr.length - 1);
 		}
+
+		linksStr += "]";
+
+		var port = chrome.extension.connect();
+
+		port.postMessage({
+			type: "downloadLinks",
+			links: linksStr
+		});
+
+		// closing pop-up
+		self.close();
+	},
+
+	// Events
+
+	onLoad: function() {
+		if(!document.querySelector("#download_all_popup"))
+			return;
+
+		document.querySelector("#download_all_popup #check").addEventListener("click", function() { DownloadAllPopup.evalExtensions(true); });
+		document.querySelector("#download_all_popup #uncheck").addEventListener("click", function() { DownloadAllPopup.evalExtensions(false); });
+
+		document.querySelector("#download_all_popup #download").addEventListener("click", DownloadAllPopup.downloadAll);
+		document.querySelector("#download_all_popup #close").addEventListener("click", function(){ self.close(); });
+
+		document.querySelector("#download_all_popup #check_all").addEventListener("click", function(){ DownloadAllPopup.selectAll(this); });
+
+		DownloadAllPopup.listLinks();
 	}
+};
 
-	if (linksStr.charAt(linksStr.length - 1) == ',')
-	{
-		linksStr = linksStr.substring(0, linksStr.length - 1);
-	}
-
-	linksStr += "]";
-
-	var port = chrome.extension.connect();
-
-	port.postMessage({"type": "downloadLinks", "links": linksStr});
-
-	// closing pop-up
-	self.close();
-}
+document.addEventListener("DOMContentLoaded", DownloadAllPopup.onLoad);
 

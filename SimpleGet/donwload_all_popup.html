@@ -18,7 +18,7 @@
 	<head>
 		<title>Download All - Selection</title>
 	</head>
-	
+
 	<script type="text/javascript" src="donwload_all_popup.js"></script>
 
 	<style type="text/css" media="screen">
@@ -122,15 +122,15 @@
 		}
 	</style>
 
-	<body onload="list_links()">
+	<body id="download_all_popup">
 		<div id="content">
 			<span id="title">Select the URLs:</span>
 
 			<div class="table-data">
-				<table class="sortable" id="linksTable" width="100%">
+				<table class="sortable" id="links_table" width="100%">
 					<tr style="position:fixed">
 						<td class="td-attrib-header" width="20px">
-							<input type="checkbox" name="checkAll" checked="checked" onClick="select_all(this)"/>
+							<input type="checkbox" id="check_all" checked="checked" />
 						</td>
 						<td class="td-attrib-header" width="644px">URL</td>
 					</tr>
@@ -141,7 +141,7 @@
 				<table aling="center">
 					<tr>
 						<td><label>Extensions:</label></td>
-						<td><input id="extensions" type="text"></td>
+						<td><input id="extensions" type="text" /></td>
 					</tr>
 					<tr>
 						<td>
@@ -151,16 +151,16 @@
 							</div>
 						</td>
 						<td align="right">
-							<button onclick="eval_extensions('check')">Check</button>
-							<button onclick="eval_extensions('uncheck')">Uncheck</button>
+							<button id="check">Check</button>
+							<button id="uncheck">Uncheck</button>
 						</td>
 					</tr>
 				</table>
 			</div>
 
 			<div id="buttons">
-				<button onClick="download_all()">Download</button>
-				<button onClick="self.close()">Cancel</button>
+				<button id="download">Download</button>
+				<button id="close">Cancel</button>
 			</div>
 		</div>
 	</body>
