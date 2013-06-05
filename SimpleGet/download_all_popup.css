@@ -1,0 +1,82 @@
+body {
+	font: normal 13px "Trebuchet MS", Arial, Helvetica, sans-serif;
+	background: #b5b5b5;
+	width: 700px;
+}
+
+#title {
+	padding: 20px 0px 20px 0px;
+}
+
+#extensions {
+	width: 400px;
+}
+
+#buttons {
+	text-align: right;
+	margin: 0px 15px 20px 0px;
+}
+
+/* ---- tables ---- */
+table {
+	empty-cells: show;
+	font-size: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
+}
+
+table.sortable {
+	border-collapse: collapse;
+}
+
+table.sortable td {
+	padding: 0;
+}
+
+table.sortable a.sortheader {
+	background-color: #EEEEEE;
+	color: #666666;
+	font-weight: bold;
+	text-decoration: none;
+	display: block;
+}
+
+table.sortable span.sortarrow {
+	color: #000000;
+	text-decoration: none;
+}
+
+.table-data {
+	border: 1px solid #666666;
+	background: #FFFFFF;
+	overflow-y: scroll;
+	width: 680px;
+	height: 250px;
+	margin-top: 10px;
+}
+
+.td-attrib-header /* extends .fieldlabel */ {
+	background: #E8E8E8;
+	border: 1px solid #666666;
+	border-top: none;
+	border-left: none;
+	text-align: center;
+}
+
+/* ---- Fields ---- */
+.fieldlabel,.td-attrib-header {
+	font-size: 12px;
+	font-weight: bold;
+	color: #666666;
+}
+
+.fieldvalue,.td-attrib-data {
+	font-size: 12px;
+	font-weight: normal;
+}
+
+.example {
+	font-size: 80%;
+	color: #555;
+	margin-left: 20px;
+}
