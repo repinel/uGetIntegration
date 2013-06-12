@@ -19,7 +19,8 @@ Options = {
 	values: {
 		download_manager_path: "/usr/bin/uget-gtk",
 		download_manager_parameters: "[URL]",
-		download_destination: ""
+		download_destination: "",
+		multiple_calls: false,
 	},
 
 	getKeys: function() {
@@ -50,7 +51,14 @@ Options = {
 	defaultOptions: function() {
 		Options.getStorage().set(Options.values, function() {
 			for (var key in Options.values) {
-				document.querySelector("#download_options #" + key).value = Options.values[key];
+				var element = document.querySelector("#download_options #" + key);
+
+				if (Options.isCheckbox(element)) {
+					element.checked = Util.parseBoolean(Options.values[key]);
+				} else {
+					element.value = Options.values[key];
+				}
+
 				console.log(key + " restored: " + Options.values[key]);
 			}
 			Options.setStatus("uGet Integration Settings have been reset to the Defaults");
@@ -61,7 +69,13 @@ Options = {
 	saveOptions: function() {
 		var newValues = {};
 		for (var key in Options.values) {
-			newValues[key] = document.querySelector("#download_options #" + key).value;
+			var element = document.querySelector("#download_options #" + key);
+
+			if (Options.isCheckbox(element)) {
+				newValues[key] = Util.parseBoolean(element.checked);
+			} else {
+				newValues[key] = Options.values[key];
+			}
 		}
 
 		Options.getStorage().set(newValues, function() {
@@ -99,15 +113,21 @@ Options = {
 					value = Options.values[key];
 				}
 
-				var item = document.querySelector("#download_options #" + key);
+				var element = document.querySelector("#download_options #" + key);
 
-				if(item) {
-					item.value = value;
+				if (Options.isCheckbox(element)) {
+					element.checked = Util.parseBoolean(value);
+				} else {
+					element.value = value;
 				}
 
 				console.log(key + (force ? " initialized: " : " loaded: ") + value);
 			}
 		});
+	},
+
+	isCheckbox: function(element) {
+		return element.type == "checkbox";
 	},
 
 	// Events

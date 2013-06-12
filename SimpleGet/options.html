@@ -18,6 +18,7 @@
 	<head>
 		<title>uGet Integration Options</title>
 
+		<script type="text/javascript" src="util.js"></script>
 		<script type="text/javascript" src="options.js"></script>
 
 		<link rel="stylesheet" type="text/css" href="options.css" media="all">
@@ -29,17 +30,25 @@
 			<div id="status"></div>
 			<div class="options">
 				<fieldset>
-					<label for="download_manager_path">App Path:</label><input id="download_manager_path" type="text">
-					<label for="download_destination">Folder Path:</label><input id="download_destination" type="text">
-					<label for="download_manager_parameters">Parameters:</label><textarea id="download_manager_parameters"></textarea>
+					<div>
+						<label for="download_manager_path">App Path:</label><input id="download_manager_path" type="text">
+						<label for="download_destination">Folder Path:</label><input id="download_destination" type="text">
+						<label for="download_manager_parameters">Parameters:</label><textarea id="download_manager_parameters"></textarea>
+					</div>
 					<div class="example">
 						<strong>Quiet Mode</strong>: --quiet [URL]<br />
 						Skips download dialog, starts the download immediately.<br /><br />
 						<strong>Download Direct to a Folder</strong>: --folder [FOLDER] [URL]<br />
 						Add a value similar to "/home/user/Downloads" (without quotes) in the Destination field.<br />
 					</div>
-					<button class="save" id="save">Save Settings</button>
-					<button class="reset" id="reset">Reset</button>
+					<div class="clear"></div>
+					<div>
+						<label for="multiple_calls">Multiple Calls?</label><input id="multiple_calls" type="checkbox" value="true">
+					</div>
+					<div>
+						<button class="save" id="save">Save Settings</button>
+						<button class="reset" id="reset">Reset</button>
+					</div>
 				</fieldset>
 			</div>
 			<div id="credits">

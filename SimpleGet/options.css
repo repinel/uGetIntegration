@@ -11,6 +11,10 @@ body {
 	background: linear-gradient(to bottom, #eeeeee 0%, #e3e3e3 100%);
 }
 
+.clear {
+	clear: both;
+}
+
 #wrapper {
 	width: 540px;
 	margin: 0 auto;
