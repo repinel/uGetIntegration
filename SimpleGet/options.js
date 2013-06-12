@@ -18,9 +18,10 @@ Options = {
 	// global options
 	values: {
 		download_manager_path: "/usr/bin/uget-gtk",
-		download_manager_parameters: "[URL]",
 		download_destination: "",
-		multiple_calls: false,
+		download_url_parameters: "[URL]",
+		download_additional_parameters: "",
+		multiple_calls: false
 	},
 
 	getKeys: function() {
@@ -41,6 +42,7 @@ Options = {
 			for (var key in Options.values) {
 				if (!items[key]) {
 					Options.restoreOptions(true);
+					Options.getStorage().set(Options.values, function() {});
 					break;
 				}
 			}
@@ -74,7 +76,7 @@ Options = {
 			if (Options.isCheckbox(element)) {
 				newValues[key] = Util.parseBoolean(element.checked);
 			} else {
-				newValues[key] = Options.values[key];
+				newValues[key] = element.value;
 			}
 		}
 
@@ -111,17 +113,20 @@ Options = {
 				// first time, using default.
 				if (force || !value) {
 					value = Options.values[key];
+					
 				}
 
 				var element = document.querySelector("#download_options #" + key);
 
-				if (Options.isCheckbox(element)) {
-					element.checked = Util.parseBoolean(value);
-				} else {
-					element.value = value;
-				}
+				if (element) {
+					if (Options.isCheckbox(element)) {
+						element.checked = Util.parseBoolean(value);
+					} else {
+						element.value = value;
+					}
 
-				console.log(key + (force ? " initialized: " : " loaded: ") + value);
+					console.log(key + (force ? " initialized: " : " loaded: ") + value);
+				}
 			}
 		});
 	},

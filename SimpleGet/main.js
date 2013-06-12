@@ -15,34 +15,50 @@
 // limitations under the License.
 
 Main = {
-	downloadURL: function(url) {
-		console.log("URL: " + url);
+	downloadURLs: function(urls) {
+		console.log("URLs: " + urls);
 
 		Options.getStorage().get(Options.getKeys(), function(items) {
 			var application = items["download_manager_path"];
-			var parameters = items["download_manager_parameters"];
 			var destination = items["download_destination"];
+			var urlParams = items["download_url_parameters"];
+			var additionalParams = items["download_additional_parameters"];
+			var multipleCalls = Util.parseBoolean(items["multiple_calls"]);
 
 			console.log("DownloadMangerPath: " + application);
-			console.log("DownloadMangerParameters: " + parameters);
 			console.log("DownloadDestination: " + destination);
+			console.log("DownloadURLParams: " + urlParams);
+			console.log("DownloadAdditionalParams: " + additionalParams);
+			console.log("MultipleCalls: " + multipleCalls);
 
-			parameters = parameters.replace("[URL]", '"' + url + '"');
-			parameters = parameters.replace("[FOLDER]", '"' + destination + '"');
+			additionalParams = additionalParams.replace("[FOLDER]", '"' + destination + '"');
 
-			Background.sg.callApplication(application, parameters);
+			var parameters = "";
+			for (var i = 0; i < urls.length; i++) {
+				if (multipleCalls)
+					parameters = "";
+
+				parameters += " " + urlParams.replace("[URL]", '"' + urls[i] + '"');
+				
+				if (multipleCalls) {
+					parameters += " " + additionalParams;
+					Background.sg.callApplication(application, parameters);
+				}
+			}
+			if (!multipleCalls) {
+				parameters += " " + additionalParams;
+				Background.sg.callApplication(application, parameters);
+			}
 		});
 	},
 
 	downloadLinkOnClick: function(info, tab) {
 		console.log("DownloadLink: " + info.menuItemId + " was clicked.");
-
-		Main.downloadURL(info.linkUrl);
+		Main.downloadURLs([info.linkUrl]);
 	},
 
 	downloadAllOnClick: function(info, tab) {
 		console.log("DownloadAll: " + info.menuItemId + " was clicked.");
-
 		chrome.tabs.executeScript(null, { file: "download_all.js" });
 	}
 };
@@ -96,9 +112,7 @@ chrome.extension.onConnect.addListener(
 
 					console.log(links.length + " links returned");
 
-					for (var i = 0; i < links.length; i++) {
-						Main.downloadURL(links[i]);
-					}
+					Main.downloadURLs(links);
 				}
 			}
 		);
