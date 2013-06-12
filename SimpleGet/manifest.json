@@ -5,7 +5,7 @@
 	"manifest_version": 2,
 
 	"homepage_url": "http://uget.visuex.com/extchrome",
-	"update_url": "http://pinel.cc/files/simple-get/updates.xml",
+	"update_url": "http://uget.visuex.com/extchrome/updates.xml",
 
 	"permissions": ["contextMenus", "tabs", "storage", "http://*/*",
 					"https://*/*", "ftp://*/*", "file:///*/*"],

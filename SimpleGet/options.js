@@ -1,6 +1,12 @@
 // Copyright 2011 Roque Pinel.
 //
-// This file is part of Simple Get.
+// Based on the Simple Get extension.
+//
+// **** **** **** **** **** ****
+//
+// Copyright 2013 uGet Integration.
+//
+// This file is part of uGet Integration.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
