@@ -177,20 +177,24 @@ body {
 	background: linear-gradient(to bottom, #6AB43E 0%, #3A7E19 100%);
 }
 
-#credits {
-	padding: 0 20px;
-	color: #3c3d36;
-}
+/*
+ * Footer
+ */
 
-#credits a:link,#credits a:visited {
+#footer a:link, #footer a:visited {
 	text-decoration: underline;
 	color: #3c3d36;
 }
 
-#credits a:hover,#credits a:active,#credits a:focus {
+#footer a:hover, #footer a:active, #footer a:focus {
 	text-decoration: normal;
 	color: #4B9E21;
 	outline: 0;
+}
+
+#credits {
+	padding: 0 20px;
+	color: #3c3d36;
 }
 
 #credits .uget {
@@ -202,3 +206,10 @@ body {
 	float: right;
 	text-align: right;
 }
+
+#license {
+	margin-top: 15px;
+	font-size: 80%;
+	text-align: center;
+}
+
