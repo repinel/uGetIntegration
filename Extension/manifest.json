@@ -5,10 +5,8 @@
 	"manifest_version": 2,
 
 	"homepage_url": "http://uget.visuex.com/extchrome",
-	"update_url": "http://uget.visuex.com/extchrome/updates.xml",
 
-	"permissions": ["contextMenus", "tabs", "storage", "http://*/*",
-					"https://*/*", "ftp://*/*", "file:///*/*"],
+	"permissions": ["contextMenus", "tabs", "storage", "http://*/*", "https://*/*", "ftp://*/*"],
 
 	"options_page": "options.html",
 
