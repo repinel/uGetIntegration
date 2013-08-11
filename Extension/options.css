@@ -95,7 +95,7 @@ body {
 	padding: 5px 0 0 0;
 }
 
-.options fieldset input {
+.options fieldset input[type=text] {
 	width: 80%;
 	margin: 0 0 15px 0;
 	background: #eee;
