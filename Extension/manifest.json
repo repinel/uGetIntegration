@@ -4,7 +4,7 @@
 	"version": "1.0.0",
 	"manifest_version": 2,
 
-	"homepage_url": "http://uget.visuex.com/extchrome",
+	"homepage_url": "https://github.com/repinel/uGetIntegration",
 
 	"permissions": ["contextMenus", "tabs", "storage", "http://*/*", "https://*/*", "ftp://*/*"],
 
