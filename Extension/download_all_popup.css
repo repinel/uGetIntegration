@@ -23,25 +23,25 @@ limitations under the License.
 */
 
 body {
-	font: normal 13px "Trebuchet MS", Arial, Helvetica, sans-serif;
-	background: #b5b5b5;
+	color: #3c3d36;
+	font: normal 14px "Trebuchet MS", Arial, Helvetica, sans-serif;
 	width: 700px;
+	background: #e3e3e3;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eeeeee),
+		color-stop(100%, #e3e3e3) );
+	background: -webkit-linear-gradient(top, #eeeeee 0%, #e3e3e3 100%);
+	background: linear-gradient(to bottom, #eeeeee 0%, #e3e3e3 100%);
 }
 
 #title {
+	font-weight:bold;
 	padding: 20px 0px 20px 0px;
 }
 
-#extensions {
-	width: 400px;
-}
+/*
+ * URLs
+ */
 
-#buttons {
-	text-align: right;
-	margin: 0px 15px 20px 0px;
-}
-
-/* ---- tables ---- */
 table {
 	empty-cells: show;
 	font-size: 100%;
@@ -87,7 +87,41 @@ table.sortable span.sortarrow {
 	text-align: center;
 }
 
-/* ---- Fields ---- */
+/* ---- filters ---- */
+
+#filters {
+	width: 680px;
+	margin: 10px 0 10px 0;
+}
+
+#filters fieldset {
+	border: 1px solid #ccc;
+	padding: 10px;
+	border-radius: 20px;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+	background: #f2f2f2;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fafafa),
+		color-stop(100%, #f2f2f2) );
+	background: -webkit-linear-gradient(top, #fafafa 0%, #f2f2f2 100%);
+	background: linear-gradient(to bottom, #fafafa 0%, #f2f2f2 100%);
+}
+
+#filters fieldset label {
+	width: 20%;
+	float: left;
+	padding: 5px 0 0 0;
+}
+
+#filters fieldset input[type=text] {
+	width: 80%;
+	margin: 0 0 15px 0;
+	background: #eee;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3) inset;
+	padding: 5px 10px;
+}
+
 .fieldlabel,.td-attrib-header {
 	font-size: 12px;
 	font-weight: bold;
@@ -104,3 +138,60 @@ table.sortable span.sortarrow {
 	color: #555;
 	margin-left: 20px;
 }
+
+/*
+ * Buttons
+ */
+
+#buttons {
+	margin-right: 20px;
+}
+
+.btn-gray {
+	float: right;
+	cursor: pointer;
+	border-radius: 7px;
+	border: 1px solid #aaa;
+	padding: 2px 7px;
+	color: #666;
+	font-size: 14px;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+	background: #ccc;
+}
+
+.btn-gray:hover,.btn-gray:focus {
+	background: #aaa;
+	color: #333;
+	border: 1px solid #777;
+	outline: 0;
+}
+
+.btn-green {
+	float: right;
+	cursor: pointer;
+	border-radius: 7px;
+	padding: 2px 7px;
+	margin: 0 0 0 20px;
+	color: #eee;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+	font-size: 18px;
+	border: 0;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+	background: #3A7E19;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #488A24),
+		color-stop(100%, #3A7E19) );
+	background: -webkit-linear-gradient(top, #488A24 0%, #3A7E19 100%);
+	background: linear-gradient(to bottom, #488A24 0%, #3A7E19 100%);
+}
+
+.btn-green:hover,.btn-green:focus {
+	outline: 0;
+	background: #3A7E19;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #6AB43E),
+		color-stop(100%, #47971F) );
+	background: -webkit-linear-gradient(top, #6AB43E 0%, #47971F 100%);
+	background: linear-gradient(to bottom, #6AB43E 0%, #3A7E19 100%);
+}
+
+
+

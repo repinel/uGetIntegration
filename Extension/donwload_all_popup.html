@@ -44,29 +44,24 @@
 			</div>
 
 			<div id="filters">
-				<table aling="center">
-					<tr>
-						<td><label for="extensions">Extensions:</label></td>
-						<td><input id="extensions" type="text"></td>
-					</tr>
-					<tr>
-						<td>
-							<div class="example">
-								Comma-separated values:<br>
-								avi, mp3
-							</div>
-						</td>
-						<td align="right">
-							<button id="check">Check</button>
-							<button id="uncheck">Uncheck</button>
-						</td>
-					</tr>
-				</table>
+				<fieldset>
+					<div>
+						<label for="extensions">Extensions:</label><input id="extensions" type="text">
+					</div>
+					<div class="example" style="float: left;">
+						<strong>Comma-separated values:</strong><br />
+						avi, mp3, tar.gz
+					</div>
+					<div style="float: right;">
+						<button id="check" class="btn-gray" style="margin-left: 20px;">Check</button>
+						<button id="uncheck" class="btn-gray">Uncheck</button>
+					</div>
+				</fieldset>
 			</div>
 
 			<div id="buttons">
-				<button id="download">Download</button>
-				<button id="close">Cancel</button>
+				<button id="download" class="btn-green">Download</button>
+				<button id="close" class="btn-gray">Cancel</button>
 			</div>
 		</div>
 	</body>

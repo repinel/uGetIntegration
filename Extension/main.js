@@ -104,7 +104,7 @@ chrome.extension.onConnect.addListener(
 					var popup = window.open(
 						"donwload_all_popup.html",
 						'Download All - Selection',
-						'width = 725, height = 400, resizable = 0, toolbar = no, menubar = no, status = no, scrollbars = no'
+						'width = 712, height = 450, resizable = 0, toolbar = no, menubar = no, status = no, scrollbars = no'
 					);
 
 					// ensure that the focus was changed
