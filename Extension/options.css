@@ -67,13 +67,17 @@ body {
 	clear: both;
 }
 
-.options {
+/*
+ * Options
+ */
+
+#options {
 	clear: both;
 	padding: 0;
 	margin: 20px 0;
 }
 
-.options fieldset {
+#options fieldset {
 	border: 1px solid #ccc;
 	padding: 20px;
 	border-radius: 20px;
@@ -85,17 +89,17 @@ body {
 	background: linear-gradient(to bottom, #fafafa 0%, #f2f2f2 100%);
 }
 
-.options h3 {
+#options h3 {
 	text-align: center;
 }
 
-.options fieldset label {
+#options fieldset label {
 	width: 20%;
 	float: left;
 	padding: 5px 0 0 0;
 }
 
-.options fieldset input[type=text] {
+#options fieldset input[type=text] {
 	width: 80%;
 	margin: 0 0 15px 0;
 	background: #eee;
@@ -105,7 +109,7 @@ body {
 	padding: 5px 10px;
 }
 
-.options fieldset textarea {
+#options fieldset textarea {
 	width: 80%;
 	height: 50px;
 	resize: none;
@@ -116,7 +120,8 @@ body {
 	padding: 5px 10px;
 }
 
-.options fieldset input:focus,.options fieldset textarea:focus {
+#options fieldset input:focus,
+#options fieldset textarea:focus {
 	outline: 0;
 	border: 1px solid #3A7E19;
 	background: #f3f3f3;
@@ -131,7 +136,7 @@ body {
 	margin: 10px 0 20px 0;
 }
 
-.reset {
+#reset {
 	float: right;
 	cursor: pointer;
 	border-radius: 10px;
@@ -143,14 +148,15 @@ body {
 	background: #ccc;
 }
 
-.reset:hover,.reset:focus {
+#reset:hover,
+#reset:focus {
 	background: #aaa;
 	color: #333;
 	border: 1px solid #777;
 	outline: 0;
 }
 
-.save {
+#save {
 	float: right;
 	cursor: pointer;
 	border-radius: 10px;
@@ -168,7 +174,8 @@ body {
 	background: linear-gradient(to bottom, #488A24 0%, #3A7E19 100%);
 }
 
-.save:hover,.save:focus {
+#save:hover,
+#save:focus {
 	outline: 0;
 	background: #3A7E19;
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #6AB43E),
@@ -181,12 +188,15 @@ body {
  * Footer
  */
 
-#footer a:link, #footer a:visited {
+#footer a:link,
+#footer a:visited {
 	text-decoration: underline;
 	color: #3c3d36;
 }
 
-#footer a:hover, #footer a:active, #footer a:focus {
+#footer a:hover,
+#footer a:active,
+#footer a:focus {
 	text-decoration: normal;
 	color: #4B9E21;
 	outline: 0;
@@ -197,12 +207,12 @@ body {
 	color: #3c3d36;
 }
 
-#credits .uget {
+#uget {
 	float: left;
 	text-align: left;
 }
 
-#credits .sg {
+#sg {
 	float: right;
 	text-align: right;
 }

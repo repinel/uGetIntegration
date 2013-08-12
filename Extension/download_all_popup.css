@@ -79,12 +79,15 @@ table.sortable span.sortarrow {
 	margin-top: 10px;
 }
 
-.td-attrib-header /* extends .fieldlabel */ {
+.td-attrib-header {
 	background: #E8E8E8;
 	border: 1px solid #666666;
 	border-top: none;
 	border-left: none;
 	text-align: center;
+	font-size: 12px;
+	font-weight: bold;
+	color: #666666;
 }
 
 /* ---- filters ---- */
@@ -122,17 +125,6 @@ table.sortable span.sortarrow {
 	padding: 5px 10px;
 }
 
-.fieldlabel,.td-attrib-header {
-	font-size: 12px;
-	font-weight: bold;
-	color: #666666;
-}
-
-.fieldvalue,.td-attrib-data {
-	font-size: 12px;
-	font-weight: normal;
-}
-
 .example {
 	font-size: 80%;
 	color: #555;
@@ -159,7 +151,8 @@ table.sortable span.sortarrow {
 	background: #ccc;
 }
 
-.btn-gray:hover,.btn-gray:focus {
+.btn-gray:hover,
+.btn-gray:focus {
 	background: #aaa;
 	color: #333;
 	border: 1px solid #777;
@@ -184,7 +177,8 @@ table.sortable span.sortarrow {
 	background: linear-gradient(to bottom, #488A24 0%, #3A7E19 100%);
 }
 
-.btn-green:hover,.btn-green:focus {
+.btn-green:hover,
+.btn-green:focus {
 	outline: 0;
 	background: #3A7E19;
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #6AB43E),
