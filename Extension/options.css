@@ -212,14 +212,8 @@ body {
 	text-align: left;
 }
 
-#sg {
+#license {
 	float: right;
 	text-align: right;
-}
-
-#license {
-	margin-top: 15px;
 	font-size: 80%;
-	text-align: center;
 }
-
