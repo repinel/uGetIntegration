@@ -144,6 +144,9 @@ Options = {
 	// Events
 
 	onLoad: function() {
+		// set the default options
+		Options.setFirstTime();
+		
 		if(!document.querySelector("#download_options"))
 			return;
 
