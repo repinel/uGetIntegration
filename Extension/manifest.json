@@ -18,12 +18,6 @@
 	"icons": {
 		"32": "uGet_32.png",
 		"48": "uGet_48.png"
-	},
-
-	"plugins": [
-		{ "path": "libsimpleGetPlugin.so", "public": false },
-		{ "path": "libsimpleGetPlugin64.so", "public": false },
-		{ "path": "npsimpleGetPlugin.dll", "public": false }
-	]
+	}
 }
 

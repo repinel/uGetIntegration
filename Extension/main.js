@@ -48,12 +48,12 @@ Main = {
 				
 				if (multipleCalls) {
 					parameters += " " + additionalParams;
-					Background.sg.callApplication(application, parameters);
+					//Background.sg.callApplication(application, parameters);
 				}
 			}
 			if (!multipleCalls) {
 				parameters += " " + additionalParams;
-				Background.sg.callApplication(application, parameters);
+				//Background.sg.callApplication(application, parameters);
 			}
 		});
 	},

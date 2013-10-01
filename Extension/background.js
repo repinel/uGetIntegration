@@ -21,19 +21,7 @@
 // limitations under the License.
 
 Background = {
-	sg: null,
-
 	onLoad: function() {
-		/* loading the simple get plugin */
-		var plugin = document.getElementById("simpleGetPluginId");
-
-		Background.sg = plugin.SimpleGetPlugin();
-
-		if (Background.sg) {
-			console.log("SimpleGetPlugin: loaded.");
-		} else {
-			console.log("SimpleGetPlugin: not loaded.");
-		}
 
 		// set the default options
 		Options.setFirstTime();
