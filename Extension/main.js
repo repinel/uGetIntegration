@@ -37,25 +37,30 @@ Main = {
 			console.log("DownloadAdditionalParams: " + additionalParams);
 			console.log("MultipleCalls: " + multipleCalls);
 
-			additionalParams = additionalParams.replace("[FOLDER]", '"' + destination + '"');
+			additionalParams = additionalParams.replace("[FOLDER]", "'" + destination + "'");
 
 			var parameters = "";
 			for (var i = 0; i < urls.length; i++) {
 				if (multipleCalls)
 					parameters = "";
 
-				parameters += " " + urlParams.replace("[URL]", '"' + urls[i] + '"');
+				parameters += " " + urlParams.replace("[URL]", "'" + urls[i] + "'");
 				
 				if (multipleCalls) {
 					parameters += " " + additionalParams;
-					//Background.sg.callApplication(application, parameters);
+					Main.sendMessage(application, parameters);
 				}
 			}
 			if (!multipleCalls) {
 				parameters += " " + additionalParams;
-				//Background.sg.callApplication(application, parameters);
+				Main.sendMessage(application, parameters);
 			}
 		});
+	},
+	
+	sendMessage: function(application, parameters) {
+		port = chrome.extension.connectNative("com.ugetdm.integration");
+		port.postMessage({"application": application, "parameters": parameters});
 	},
 
 	downloadLinkOnClick: function(info, tab) {

@@ -1,0 +1,41 @@
+#!/bin/bash
+# Copyright 2013 uGet Integration.
+#
+# This file is part of uGet Integration.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http:#www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+set -e
+
+DIR="$( cd "$( dirname "$0" )" && pwd )"
+if [ $(uname -s) == 'Darwin' ]; then
+  TARGET_DIR='/Library/Google/Chrome/NativeMessagingHosts'
+else
+  TARGET_DIR='/etc/opt/chrome/native-messaging-hosts'
+fi
+
+HOST_NAME=com.ugetdm.integration
+HOST_PATH=$DIR/ugetdm-integration
+
+mkdir -p $TARGET_DIR
+cp $DIR/${HOST_NAME}.json $TARGET_DIR
+
+# Update host path in the manifest.
+ESCAPED_HOST_PATH=${HOST_PATH////\\/}
+sed -i .bak -e "s/HOST_PATH/$ESCAPED_HOST_PATH/" ${TARGET_DIR}/${HOST_NAME}.json
+rm -f ${TARGET_DIR}/${HOST_NAME}.json.bak
+
+# Set permissions for the manifest so that all users can read it.
+chmod o+r ${TARGET_DIR}/${HOST_NAME}.json
+
+echo Native messaging host $HOST_NAME has been installed.
