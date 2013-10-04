@@ -32,27 +32,13 @@ Options = {
 
 	getKeys: function() {
 		var keys = [];
-		for (var key in Options.values) {
+		for (var key in Options.values)
 			keys.push(key);
-		}
 		return keys;
 	},
 
 	getStorage: function() {
 		return chrome.storage.local;
-	},
-
-	// Set the default options when installed
-	setFirstTime: function() {
-		Options.getStorage().get(Options.getKeys(), function(items) {
-			for (var key in Options.values) {
-				if (!items[key]) {
-					Options.restoreOptions(true);
-					Options.getStorage().set(Options.values, function() {});
-					break;
-				}
-			}
-		});
 	},
 
 	// Restore to defaults.
@@ -61,12 +47,10 @@ Options = {
 			for (var key in Options.values) {
 				var element = document.querySelector("#download_options #" + key);
 
-				if (Options.isCheckbox(element)) {
+				if (Options.isCheckbox(element))
 					element.checked = Util.parseBoolean(Options.values[key]);
-				} else {
+				else
 					element.value = Options.values[key];
-				}
-
 				console.log(key + " restored: " + Options.values[key]);
 			}
 			Options.setStatus("uGet Integration Settings have been reset to the Defaults");
@@ -79,18 +63,15 @@ Options = {
 		for (var key in Options.values) {
 			var element = document.querySelector("#download_options #" + key);
 
-			if (Options.isCheckbox(element)) {
+			if (Options.isCheckbox(element))
 				newValues[key] = Util.parseBoolean(element.checked);
-			} else {
+			else
 				newValues[key] = element.value;
-			}
 		}
 
 		Options.getStorage().set(newValues, function() {
-			for (var key in Options.values) {
+			for (var key in Options.values)
 				console.log(key + " stored: " + newValues[key]);
-			}
-
 			Options.setStatus("uGet Integration Settings - Saved Successfully");
 		});
 	},
@@ -107,31 +88,18 @@ Options = {
 	},
 
 	// Restores select box state to saved value from chrome.storage.local.set.
-	restoreOptions: function(force) {
-		if (typeof force === "undefined") {
-			force = false;
-		}
-
+	restoreOptions: function() {
 		Options.getStorage().get(Options.getKeys(), function(items) {
 			for (var key in Options.values) {
 				var value = items[key];
-
-				// first time, using default.
-				if (force || !value) {
-					value = Options.values[key];
-					
-				}
-
 				var element = document.querySelector("#download_options #" + key);
 
 				if (element) {
-					if (Options.isCheckbox(element)) {
+					if (Options.isCheckbox(element))
 						element.checked = Util.parseBoolean(value);
-					} else {
+					else
 						element.value = value;
-					}
-
-					console.log(key + (force ? " initialized: " : " loaded: ") + value);
+					console.log(key + " loaded: " + value);
 				}
 			}
 		});
@@ -144,9 +112,6 @@ Options = {
 	// Events
 
 	onLoad: function() {
-		// set the default options
-		Options.setFirstTime();
-		
 		if(!document.querySelector("#download_options"))
 			return;
 

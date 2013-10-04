@@ -28,16 +28,14 @@ DownloadAll = {
 
 		for (var i = 0; i < links.length; i++) {
 			// checks if is a malito
-			if (links[i].href.match("^mailto")) {
+			if (links[i].href.match("^mailto"))
 				continue;
-			}
 
 			linksStr += '"' + links[i].href + '",';
 		}
 
-		if (linksStr.charAt(linksStr.length - 1) == ',') {
+		if (linksStr.charAt(linksStr.length - 1) == ',')
 			linksStr = linksStr.substring(0, linksStr.length - 1);
-		}
 
 		linksStr += "]";
 
