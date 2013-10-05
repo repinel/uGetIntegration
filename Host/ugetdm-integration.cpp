@@ -1,6 +1,11 @@
 #include <iostream>
+#include <cstdio>
 #include <cstdlib>
-#include <string>
+#include <cstring>
+
+#if defined DEBUG
+#include <fstream>
+#endif
 
 #ifdef OS_WINDOWS
 #include <windows.h>
@@ -143,20 +148,42 @@ void callApplication(const CALL *call)
 
 int main (void)
 {
+#if defined DEBUG
+	std::ofstream debug;
+	debug.open("/tmp/uget_debug.log");
+#endif
+
 	const unsigned int messageLength = readMessageLength();
+
+#if defined DEBUG
+	debug << "Length: " << messageLength << std::endl;
+#endif
+
 	char *message = readMessage(messageLength);
+
+#if defined DEBUG
+	debug << "Message: " << message << std::endl;
+#endif
 
 	CALL *call = parseMessage(message, messageLength);
 	//CALL *call = parseMessage((char *) SAMPLE, strlen(SAMPLE));
 
 	if (call != NULL)
 	{
-		std::string cmd = (call->application + " " + call->parameters + " &");
+#if defined DEBUG
+		debug << "App: " << call->application << std::endl;
+		debug << "Params: " << call->parameters << std::endl;
+#endif
+
 		callApplication(call);
 		delete call;
 	}
 
 	delete message;
+
+#if defined DEBUG
+	debug.close();
+#endif
 
 	exit(EXIT_SUCCESS);
 }
