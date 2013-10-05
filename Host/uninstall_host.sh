@@ -18,12 +18,16 @@
 set -e
 
 if [ $(uname -s) == 'Darwin' ]; then
-  TARGET_DIR='/Library/Google/Chrome/NativeMessagingHosts'
+    TARGET_DIRS=( '/Library/Google/Chrome/NativeMessagingHosts' )
 else
-  TARGET_DIR='/etc/opt/chrome/native-messaging-hosts'
+    TARGET_DIRS=( '/etc/opt/chrome/native-messaging-hosts' '/etc/chromium/native-messaging-hosts' )
 fi
 
 HOST_NAME=com.ugetdm.integration
 
-rm $TARGET_DIR/${HOST_NAME}.json
+for target_dir in "${TARGET_DIRS[@]}"
+do
+    rm ${target_dir}/${HOST_NAME}.json
+done
+
 echo Native messaging host $HOST_NAME has been uninstalled.
