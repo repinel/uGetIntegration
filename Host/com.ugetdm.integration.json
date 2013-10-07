@@ -21,6 +21,7 @@
   "type": "stdio",
   "allowed_origins": [
     "chrome-extension://fnnendecpkameicepojmhpodkhlfpalc/",
-    "chrome-extension://mpaolcnehejogfclalihecogkjbhipcl/"
+    "chrome-extension://mpaolcnehejogfclalihecogkjbhipcl/",
+    "chrome-extension://fecmpabbkhgcompcckapnejclohaaokm/"
   ]
 }
