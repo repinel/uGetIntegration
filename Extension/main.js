@@ -60,7 +60,13 @@ Main = {
 	
 	sendMessage: function(application, parameters) {
 		port = chrome.extension.connectNative("com.ugetdm.integration");
+		port.onDisconnect.addListener(Main.onDisconnected);
 		port.postMessage({"application": application, "parameters": parameters});
+	},
+
+	onDisconnected: function() {
+	  console.log("Failed to connect: " + chrome.runtime.lastError.message);
+	  alert("Please install the uGet Integration host application.");
 	},
 
 	downloadLinkOnClick: function(info, tab) {
