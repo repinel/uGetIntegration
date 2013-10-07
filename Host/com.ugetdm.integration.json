@@ -20,6 +20,7 @@
   "path": "HOST_PATH",
   "type": "stdio",
   "allowed_origins": [
-    "chrome-extension://fnnendecpkameicepojmhpodkhlfpalc/"
+    "chrome-extension://fnnendecpkameicepojmhpodkhlfpalc/",
+    "chrome-extension://mpaolcnehejogfclalihecogkjbhipcl/"
   ]
 }
