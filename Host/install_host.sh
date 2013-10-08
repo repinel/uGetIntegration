@@ -36,7 +36,8 @@ do
     cp $DIR/${HOST_NAME}.json $target_dir
 
     sed -i -e "s/HOST_PATH/$ESCAPED_HOST_PATH/" ${target_dir}/${HOST_NAME}.json
-    rm -f ${target_dir}/${HOST_NAME}-e
+
+    rm -f ${target_dir}/${HOST_NAME}.json-e
 
     # Set permissions for the manifest so that all users can read it.
     chmod o+r ${target_dir}/${HOST_NAME}.json
