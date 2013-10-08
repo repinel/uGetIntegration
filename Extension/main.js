@@ -65,8 +65,13 @@ Main = {
 	},
 
 	onDisconnected: function() {
-	  console.log("Failed to connect: " + chrome.runtime.lastError.message);
-	  alert("Please install the uGet Integration host application.");
+		var message = chrome.runtime.lastError.message;
+		console.log("Failed to connect: " + message);
+
+		if (message == "Error when communicating with the native messaging host.")
+			return; // ignore
+
+		alert("Please install the uGet Integration host application.");
 	},
 
 	downloadLinkOnClick: function(info, tab) {
