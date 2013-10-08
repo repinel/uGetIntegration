@@ -203,16 +203,12 @@ int main (void)
 	if (call != NULL)
 	{
 #if defined DEBUG
-		std::cout << "App: " << call->application << std::endl;
-		std::cout << "Params: " << call->parameters << std::endl;
+		debug << "App: " << call->application << std::endl;
+		debug << "Params: " << call->parameters << std::endl;
 #endif
 
 		callApplication(call);
 		delete call;
-	}
-	else
-	{
-		std::cout << "invalid json" << std::endl;
 	}
 
 	delete message;
