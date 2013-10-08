@@ -15,15 +15,15 @@
 # limitations under the License.
 
 
-ifdef SystemRoot
-	OS = OS_WINDOWS
+ifeq ($(OS), Windows_NT)
+	CURRENT_OS = OS_WINDOWS
 else
 	uname = $(shell uname)
 	ifeq ($(uname), Linux)
-		OS = OS_LINUX
+		CURRENT_OS = OS_LINUX
 	else
 		ifeq ($(uname), Darwin)
-			OS = OS_MACOSX
+			CURRENT_OS = OS_MACOSX
 		endif
 	endif
 endif
@@ -32,7 +32,7 @@ endif
 CC = g++
 ALL = -Wall
 
-CFLAGS= -g $(ALL) -DDEBUG -D$(OS)
+CFLAGS= -g $(ALL) -DDEBUG -D$(CURRENT_OS)
 
 app_name = ugetdm-integration
 app_objects = ugetdm-integration.o
