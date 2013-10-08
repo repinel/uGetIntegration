@@ -153,8 +153,7 @@ void callApplication(const CALL *call)
 		memset(&ProcInfo, 0, sizeof(ProcInfo));    // Set up memory block
 		memset(&StartInfo, 0 , sizeof(StartInfo)); // Set up memory block
 		StartInfo.cb = sizeof(StartInfo);          // Set structure size
-		parameters = " " + parameters;
-		CreateProcess((char *) call->application.c_str(), (char *) call->parameters.c_str(), NULL, NULL, NULL, NULL, NULL, NULL, &StartInfo, &ProcInfo);
+		CreateProcess((char *) call->application.c_str(), (char *) (" " + call->parameters).c_str(), NULL, NULL, NULL, NULL, NULL, NULL, &StartInfo, &ProcInfo);
 	#endif
 
 	#if defined OS_LINUX || defined OS_MACOSX
