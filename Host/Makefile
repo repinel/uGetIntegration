@@ -32,7 +32,7 @@ endif
 CC = g++
 ALL = -Wall
 
-CFLAGS= -g $(ALL) -DDEBUG -D$(CURRENT_OS)
+CFLAGS= -g $(ALL) -D$(CURRENT_OS)
 
 app_name = ugetdm-integration
 app_objects = ugetdm-integration.o
