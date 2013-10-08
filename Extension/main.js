@@ -37,14 +37,14 @@ Main = {
 			console.log("DownloadAdditionalParams: " + additionalParams);
 			console.log("MultipleCalls: " + multipleCalls);
 
-			additionalParams = additionalParams.replace("[FOLDER]", "'" + destination + "'");
+			additionalParams = additionalParams.replace("[FOLDER]", '"' + destination + '"');
 
 			var parameters = "";
 			for (var i = 0; i < urls.length; i++) {
 				if (multipleCalls)
 					parameters = "";
 
-				parameters += " " + urlParams.replace("[URL]", "'" + urls[i] + "'");
+				parameters += " " + urlParams.replace("[URL]", '"' + urls[i] + '"');
 				
 				if (multipleCalls) {
 					parameters += " " + additionalParams;

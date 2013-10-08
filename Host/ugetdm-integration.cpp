@@ -31,6 +31,7 @@
 #define PARAMETERS_KEY "parameters"
 
 #define SAMPLE "{\"application\":\"/usr/local/bin/wget\",\"parameters\":\" 'http://ftp.gnu.org/gnu/wget/wget-1.7.1.tar.gz' -P '/tmp' \"}"
+#define SAMPLE2 "{\"application\":\"/usr/local/bin/wget\",\"parameters\":\" \\\"http://ftp.gnu.org/gnu/wget/wget-1.7.1.tar.gz\\\" -P \\\"/tmp\\\"\"}"
 
 typedef struct
 {
@@ -64,6 +65,18 @@ char * readMessage(const unsigned int &n)
 	}
 
 	return message;
+}
+
+void replaceAll(std::string &str, const std::string &target, const std::string &replacement)
+{
+	if(target.empty())
+		return;
+	size_t start_pos = 0;
+	while((start_pos = str.find(target, start_pos)) != std::string::npos)
+	{
+		str.replace(start_pos, target.length(), replacement);
+		start_pos += replacement.length();
+	}
 }
 
 CALL * parseMessage(char *message, const unsigned int &n)
@@ -142,6 +155,10 @@ CALL * parseMessage(char *message, const unsigned int &n)
 	if (call->application.length() == 0 || call->parameters.length() == 0)
 	 	return NULL;
 
+	// kind of decoding JSON
+	replaceAll(call->application, "\\\"", "\"");
+	replaceAll(call->parameters, "\\\"", "\"");
+
 	return call;
 }
 
@@ -181,17 +198,21 @@ int main (void)
 #endif
 
 	CALL *call = parseMessage(message, messageLength);
-	//CALL *call = parseMessage((char *) SAMPLE, strlen(SAMPLE));
+	//CALL *call = parseMessage((char *) SAMPLE2, strlen(SAMPLE2));
 
 	if (call != NULL)
 	{
 #if defined DEBUG
-		debug << "App: " << call->application << std::endl;
-		debug << "Params: " << call->parameters << std::endl;
+		std::cout << "App: " << call->application << std::endl;
+		std::cout << "Params: " << call->parameters << std::endl;
 #endif
 
 		callApplication(call);
 		delete call;
+	}
+	else
+	{
+		std::cout << "invalid json" << std::endl;
 	}
 
 	delete message;
