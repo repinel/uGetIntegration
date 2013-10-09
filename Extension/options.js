@@ -91,7 +91,7 @@ Options = {
 	restoreOptions: function() {
 		Options.getStorage().get(Options.getKeys(), function(items) {
 			for (var key in Options.values) {
-				var value = items[key];
+				var value = items[key] ? items[key] : Options.values[key];
 				var element = document.querySelector("#download_options #" + key);
 
 				if (element) {
