@@ -6,7 +6,7 @@
 Name "uGet Integration"
 
 ; The file to write
-OutFile "ugetdm-integration-installer.exe"
+OutFile "uGetIntegration-v1.0.exe"
 
 ; The default installation directory
 InstallDir "$PROGRAMFILES\uGetIntegration"
