@@ -53,7 +53,7 @@ Section "uGetIntegration (required)"
   WriteRegStr HKLM "SOFTWARE\uGetIntegration" "Install_Dir" "$INSTDIR"
 
   ; Write the JSON host path into the registry
-  WriteRegStr HKLM "SOFTWARE\Google\Chrome\NativeMessagingHosts\com.ugetdm.integration" "" '"$INSTDIR\com.ugetdm.integration.json"'
+  WriteRegStr HKLM "SOFTWARE\Google\Chrome\NativeMessagingHosts\com.ugetdm.integration" "" '$INSTDIR\com.ugetdm.integration.json'
   
   ; Write the uninstall keys for Windows
   WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\uGetIntegration" "DisplayName" "uGet Integration"
