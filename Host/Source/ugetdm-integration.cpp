@@ -183,30 +183,32 @@ void callApplication(const CALL *call)
 
 int main (int argc, const char* argv[])
 {
-	if (argc > 1 && strcmp(argv[1], EXTENSION_ID) != 0)
+	if (argc == 2)
 	{
-		std::cout << APPLICATION_NAME << " " << APPLICATION_VERSION << std::endl << std::endl;
-
-		if (argc == 2 && (strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "--version") == 0))
+		if (strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "--version") == 0)
 		{
+			std::cout << APPLICATION_NAME << " " << APPLICATION_VERSION << std::endl << std::endl;
 			std::cout
 			    << "Copyright (C) 2013 uGet Integration - Roque Pinel" << std::endl
 				<< "Licensed under the Apache License, Version 2.0" << std::endl
 				<< "<http://www.apache.org/licenses/LICENSE-2.0>" << std::endl << std::endl
 				<< "Originally written by Roque Pinel." << std::endl;
+			std::cout << "Please refer to <https://github.com/repinel/uGetIntegration> for bug reports and questions." << std::endl;
+
+			exit(EXIT_SUCCESS);
 		}
-		else
+		else if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0)
 		{
+			std::cout << APPLICATION_NAME << " " << APPLICATION_VERSION << std::endl << std::endl;
 			std::cout
 				<< "This application is to be used with the uGet Integration web browser extension." << std::endl << std::endl
 				<< "Additional options:" << std::endl
 				<< "-v,  --version\tdisplay the version and exit." << std::endl
 				<< "-h,  --help\tprint this help." << std::endl << std::endl;
+			std::cout << "Please refer to <https://github.com/repinel/uGetIntegration> for bug reports and questions." << std::endl;
+
+			exit(EXIT_SUCCESS);
 		}
-
-		std::cout << "Please refer to <https://github.com/repinel/uGetIntegration> for bug reports and questions." << std::endl;
-
-		exit(EXIT_SUCCESS);
 	}
 
 #if defined DEBUG
