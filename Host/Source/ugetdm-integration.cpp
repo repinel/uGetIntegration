@@ -27,6 +27,7 @@
 #include <windows.h>
 #endif
 
+#define EXTENSION_ID "chrome-extension://ghleembdahcojlajccifpgffekcpgknk/"
 #define APPLICATION_NAME "uGet Integration"
 #define APPLICATION_VERSION "1.0"
 #define APPLICATION_KEY "application"
@@ -182,7 +183,7 @@ void callApplication(const CALL *call)
 
 int main (int argc, const char* argv[])
 {
-	if (argc > 1)
+	if (argc > 1 && strcmp(argv[1], EXTENSION_ID) != 0)
 	{
 		std::cout << APPLICATION_NAME << " " << APPLICATION_VERSION << std::endl << std::endl;
 
