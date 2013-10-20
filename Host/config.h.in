@@ -33,6 +33,15 @@
 /* Define to 1 if the system has the type `_Bool'. */
 #undef HAVE__BOOL
 
+/* Using Linux */
+#undef OS_LINUX
+
+/* Using OS X */
+#undef OS_MACOSX
+
+/* Using Windows */
+#undef OS_WINDOWS
+
 /* Name of package */
 #undef PACKAGE
 

@@ -14,6 +14,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif /* HAVE_CONFIG_H */
+
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
@@ -21,11 +25,11 @@
 
 #if defined DEBUG
 #include <fstream>
-#endif
+#endif /* DEBUG */
 
 #ifdef OS_WINDOWS
 #include <windows.h>
-#endif
+#endif /* OS_WINDOWS */
 
 #define EXTENSION_ID "chrome-extension://ghleembdahcojlajccifpgffekcpgknk/"
 #define APPLICATION_NAME "uGet Integration"
@@ -167,18 +171,18 @@ CALL * parseMessage(char *message, const unsigned int &n)
 
 void callApplication(const CALL *call)
 {
-	#ifdef OS_WINDOWS
-		STARTUPINFO StartInfo;                     // name structure
-		PROCESS_INFORMATION ProcInfo;              // name structure
-		memset(&ProcInfo, 0, sizeof(ProcInfo));    // Set up memory block
-		memset(&StartInfo, 0 , sizeof(StartInfo)); // Set up memory block
-		StartInfo.cb = sizeof(StartInfo);          // Set structure size
-		CreateProcess((char *) call->application.c_str(), (char *) (" " + call->parameters).c_str(), NULL, NULL, NULL, NULL, NULL, NULL, &StartInfo, &ProcInfo);
-	#endif
+#ifdef OS_WINDOWS
+	STARTUPINFO StartInfo;                     // name structure
+	PROCESS_INFORMATION ProcInfo;              // name structure
+	memset(&ProcInfo, 0, sizeof(ProcInfo));    // Set up memory block
+	memset(&StartInfo, 0 , sizeof(StartInfo)); // Set up memory block
+	StartInfo.cb = sizeof(StartInfo);          // Set structure size
+	CreateProcess((char *) call->application.c_str(), (char *) (" " + call->parameters).c_str(), NULL, NULL, NULL, NULL, NULL, NULL, &StartInfo, &ProcInfo);
+#endif /* OS_WINDOWS */
 
-	#if defined OS_LINUX || defined OS_MACOSX
-		system((call->application + " " + call->parameters + " &").c_str());
-	#endif
+#if defined OS_LINUX || defined OS_MACOSX
+	system((call->application + " " + call->parameters + " &").c_str());
+#endif /* OS_LINUX || defined OS_MACOSX */
 }
 
 int main (int argc, const char* argv[])
@@ -214,19 +218,19 @@ int main (int argc, const char* argv[])
 #if defined DEBUG
 	std::ofstream debug;
 	debug.open("/tmp/uget_debug.log");
-#endif
+#endif /* DEBUG */
 
 	const unsigned int messageLength = readMessageLength();
 
 #if defined DEBUG
 	debug << "Length: " << messageLength << std::endl;
-#endif
+#endif /* DEBUG */
 
 	char *message = readMessage(messageLength);
 
 #if defined DEBUG
 	debug << "Message: " << message << std::endl;
-#endif
+#endif /* DEBUG */
 
 	CALL *call = parseMessage(message, messageLength);
 	//CALL *call = parseMessage((char *) SAMPLE2, strlen(SAMPLE2));
@@ -236,7 +240,7 @@ int main (int argc, const char* argv[])
 #if defined DEBUG
 		debug << "App: " << call->application << std::endl;
 		debug << "Params: " << call->parameters << std::endl;
-#endif
+#endif /* DEBUG */
 
 		callApplication(call);
 		delete call;
@@ -246,7 +250,7 @@ int main (int argc, const char* argv[])
 
 #if defined DEBUG
 	debug.close();
-#endif
+#endif /* DEBUG */
 
 	exit(EXIT_SUCCESS);
 }

@@ -1,5 +1,6 @@
 ugetdm-integration.o ugetdm-integration.o: ugetdm-integration.cpp \
-  /usr/include/c++/4.2.1/iostream /usr/include/c++/4.2.1/bits/c++config.h \
+  ../config.h /usr/include/c++/4.2.1/iostream \
+  /usr/include/c++/4.2.1/bits/c++config.h \
   /usr/include/c++/4.2.1/bits/os_defines.h /usr/include/unistd.h \
   /usr/include/_types.h /usr/include/sys/_types.h \
   /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h \
@@ -92,6 +93,8 @@ ugetdm-integration.o ugetdm-integration.o: ugetdm-integration.cpp \
   /usr/include/c++/4.2.1/bits/locale_facets.tcc \
   /usr/include/c++/4.2.1/typeinfo /usr/include/c++/4.2.1/istream \
   /usr/include/c++/4.2.1/bits/istream.tcc
+
+../config.h:
 
 /usr/include/c++/4.2.1/iostream:
 

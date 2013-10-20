@@ -2,10 +2,26 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT(ugetdm-integration, 1.0, roque@pinel.cc)
+AC_INIT(ugetdm-integration, 1.0, )
 AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([src/ugetdm-integration.cpp])
 AC_CONFIG_HEADERS([config.h])
+
+# Check the host OS
+AC_CANONICAL_HOST
+case $host_os in
+	darwin*)
+		AC_DEFINE([OS_MACOSX], [], [Using OS X])
+		;;
+	linux*)
+		AC_DEFINE([OS_LINUX], [], [Using Linux])
+		;;
+	*windows*)
+		AC_DEFINE([OS_WINDOWS], [], [Using Windows])
+		;;
+	*)
+		AC_MSG_ERROR([Your platform is not currently supported])
+esac
 
 # Checks for programs.
 AC_PROG_CXX
