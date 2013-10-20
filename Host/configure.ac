@@ -10,13 +10,13 @@ AC_CONFIG_HEADERS([config.h])
 # Check the host OS
 AC_CANONICAL_HOST
 case $host_os in
-	darwin*)
+	darwin)
 		AC_DEFINE([OS_MACOSX], [], [Using OS X])
 		;;
-	linux*)
+	linux)
 		AC_DEFINE([OS_LINUX], [], [Using Linux])
 		;;
-	mingw32*)
+	mingw32 | cygwin)
 		AC_DEFINE([OS_WINDOWS], [], [Using Windows])
 		;;
 	*)

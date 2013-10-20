@@ -2923,17 +2923,17 @@ case $host_os in *\ *) host_os=`echo "$host_os" | sed 's/ /-/g'`;; esac
 
 
 case $host_os in
-	darwin*)
+	darwin)
 
 $as_echo "#define OS_MACOSX /**/" >>confdefs.h
 
 		;;
-	linux*)
+	linux)
 
 $as_echo "#define OS_LINUX /**/" >>confdefs.h
 
 		;;
-	mingw32*)
+	mingw32 | cygwin)
 
 $as_echo "#define OS_WINDOWS /**/" >>confdefs.h
 
