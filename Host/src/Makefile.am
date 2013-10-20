@@ -20,16 +20,37 @@ bin_PROGRAMS = ugetdm-integration
 
 ugetdm_integration_SOURCES = ugetdm-integration.cpp
 
-bin_SCRIPTS = ugetdm-integration-json
+bin_SCRIPTS = com.ugetdm.integration.json
 
-ugetdm-integration-json: com.ugetdm.integration.json.in
-	case "$(host_os)" in \
+com.ugetdm.integration.json: com.ugetdm.integration.json.in
+	@case "$(host_os)" in \
 		darwin*) \
-			sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration|' < $(srcdir)/com.ugetdm.integration.json.in > com.ugetdm.integration.json ;; \
+			echo "sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration|' < '$(srcdir)/com.ugetdm.integration.json.in' > com.ugetdm.integration.json" ; \
+			sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration|' < "$(srcdir)/com.ugetdm.integration.json.in" > com.ugetdm.integration.json ;; \
 		linux) \
+			echo "sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration|' < '$(srcdir)/com.ugetdm.integration.json.in' > com.ugetdm.integration.json" ; \
 			sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration|' < $(srcdir)/com.ugetdm.integration.json.in > com.ugetdm.integration.json ;; \
 		mingw32 | cygwin) \
+			echo "sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration.exe|' < '$(srcdir)/com.ugetdm.integration.json.in' > com.ugetdm.integration.json" ; \
 			sed -e 's|HOST_PATH|ugetdm-integration.exe|' < $(srcdir)/com.ugetdm.integration.json.in > com.ugetdm.integration.json ;; \
 		*) \
-			echo "Your platform is not currently supported" ;; \
+			echo "Your platform is not currently supported" ; exit 1 ;; \
 	esac;
+
+install-binSCRIPTS: $(bin_SCRIPTS)
+	@$(NORMAL_INSTALL)
+	@case "$(host_os)" in \
+		darwin*) \
+			JSON_DIRS=( '/Library/Google/Chrome/NativeMessagingHosts' ) ;; \
+		linux) \
+			JSON_DIRS=( '/etc/opt/chrome/native-messaging-hosts' '/etc/chromium/native-messaging-hosts' ) ;; \
+		*) \
+			echo "Your platform is not currently supported for installation" ; exit 1 ;; \
+	esac; \
+	for json_dir in "$${JSON_DIRS[@]}"; do \
+		echo " $(MKDIR_P) '$$json_dir'"; \
+		$(MKDIR_P) "$$json_dir" || exit 1; \
+		echo " $(INSTALL_PROGRAM_ENV) $(INSTALL_PROGRAM) 'com.ugetdm.integration.json' '$$json_dir'"; \
+		$(INSTALL_SCRIPT_ENV) $(INSTALL_PROGRAM) "com.ugetdm.integration.json" "$$json_dir" || exit $$?; \
+    done;
+

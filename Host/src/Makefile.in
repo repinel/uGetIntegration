@@ -296,8 +296,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 ugetdm_integration_SOURCES = ugetdm-integration.cpp
-hostdir = /tmp
-bin_SCRIPTS = host
+bin_SCRIPTS = com.ugetdm.integration.json
 all: all-am
 
 .SUFFIXES:
@@ -378,34 +377,6 @@ clean-binPROGRAMS:
 ugetdm-integration$(EXEEXT): $(ugetdm_integration_OBJECTS) $(ugetdm_integration_DEPENDENCIES) $(EXTRA_ugetdm_integration_DEPENDENCIES) 
 	@rm -f ugetdm-integration$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(ugetdm_integration_OBJECTS) $(ugetdm_integration_LDADD) $(LIBS)
-install-binSCRIPTS: $(bin_SCRIPTS)
-	@$(NORMAL_INSTALL)
-	@list='$(bin_SCRIPTS)'; test -n "$(bindir)" || list=; \
-	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(bindir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(bindir)" || exit 1; \
-	fi; \
-	for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  if test -f "$$d$$p"; then echo "$$d$$p"; echo "$$p"; else :; fi; \
-	done | \
-	sed -e 'p;s,.*/,,;n' \
-	    -e 'h;s|.*|.|' \
-	    -e 'p;x;s,.*/,,;$(transform)' | sed 'N;N;N;s,\n, ,g' | \
-	$(AWK) 'BEGIN { files["."] = ""; dirs["."] = 1; } \
-	  { d=$$3; if (dirs[d] != 1) { print "d", d; dirs[d] = 1 } \
-	    if ($$2 == $$4) { files[d] = files[d] " " $$1; \
-	      if (++n[d] == $(am__install_max)) { \
-		print "f", d, files[d]; n[d] = 0; files[d] = "" } } \
-	    else { print "f", d "/" $$4, $$1 } } \
-	  END { for (d in files) print "f", d, files[d] }' | \
-	while read type dir files; do \
-	     if test "$$dir" = .; then dir=; else dir=/$$dir; fi; \
-	     test -z "$$files" || { \
-	       echo " $(INSTALL_SCRIPT) $$files '$(DESTDIR)$(bindir)$$dir'"; \
-	       $(INSTALL_SCRIPT) $$files "$(DESTDIR)$(bindir)$$dir" || exit $$?; \
-	     } \
-	; done
 
 uninstall-binSCRIPTS:
 	@$(NORMAL_UNINSTALL)
@@ -641,17 +612,37 @@ uninstall-am: uninstall-binPROGRAMS uninstall-binSCRIPTS
 	uninstall-am uninstall-binPROGRAMS uninstall-binSCRIPTS
 
 
-host: com.ugetdm.integration.json.in
-	case "$(host_os)" in \
+com.ugetdm.integration.json: com.ugetdm.integration.json.in
+	@case "$(host_os)" in \
 		darwin*) \
-			sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration|' < $(srcdir)/com.ugetdm.integration.json.in > com.ugetdm.integration.json ;; \
+			echo "sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration|' < '$(srcdir)/com.ugetdm.integration.json.in' > com.ugetdm.integration.json" ; \
+			sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration|' < "$(srcdir)/com.ugetdm.integration.json.in" > com.ugetdm.integration.json ;; \
 		linux) \
+			echo "sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration|' < '$(srcdir)/com.ugetdm.integration.json.in' > com.ugetdm.integration.json" ; \
 			sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration|' < $(srcdir)/com.ugetdm.integration.json.in > com.ugetdm.integration.json ;; \
 		mingw32 | cygwin) \
+			echo "sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration.exe|' < '$(srcdir)/com.ugetdm.integration.json.in' > com.ugetdm.integration.json" ; \
 			sed -e 's|HOST_PATH|ugetdm-integration.exe|' < $(srcdir)/com.ugetdm.integration.json.in > com.ugetdm.integration.json ;; \
 		*) \
-			echo "Your platform is not currently supported" ;; \
+			echo "Your platform is not currently supported" ; exit 1 ;; \
 	esac;
+
+install-binSCRIPTS: $(bin_SCRIPTS)
+	@$(NORMAL_INSTALL)
+	@case "$(host_os)" in \
+		darwin*) \
+			JSON_DIRS=( '/Library/Google/Chrome/NativeMessagingHosts' ) ;; \
+		linux) \
+			JSON_DIRS=( '/etc/opt/chrome/native-messaging-hosts' '/etc/chromium/native-messaging-hosts' ) ;; \
+		*) \
+			echo "Your platform is not currently supported for installation" ; exit 1 ;; \
+	esac; \
+	for json_dir in "$${JSON_DIRS[@]}"; do \
+		echo " $(MKDIR_P) '$$json_dir'"; \
+		$(MKDIR_P) "$$json_dir" || exit 1; \
+		echo " $(INSTALL_PROGRAM_ENV) $(INSTALL_PROGRAM) 'com.ugetdm.integration.json' '$$json_dir'"; \
+		$(INSTALL_SCRIPT_ENV) $(INSTALL_PROGRAM) "com.ugetdm.integration.json" "$$json_dir" || exit $$?; \
+    done;
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
