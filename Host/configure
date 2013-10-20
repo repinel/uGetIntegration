@@ -2933,7 +2933,7 @@ $as_echo "#define OS_MACOSX /**/" >>confdefs.h
 $as_echo "#define OS_LINUX /**/" >>confdefs.h
 
 		;;
-	*windows*)
+	mingw32*)
 
 $as_echo "#define OS_WINDOWS /**/" >>confdefs.h
 
