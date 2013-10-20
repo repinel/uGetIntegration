@@ -16,7 +16,7 @@ case $host_os in
 	linux*)
 		AC_DEFINE([OS_LINUX], [], [Using Linux])
 		;;
-	*windows*)
+	mingw32*)
 		AC_DEFINE([OS_WINDOWS], [], [Using Windows])
 		;;
 	*)
