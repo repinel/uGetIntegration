@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT(ugetdm-integration, 1.0, )
+AC_INIT(uGet Integration, 1.0, [], [uget-integration], [https://github.com/repinel/uGetIntegration])
 AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([src/ugetdm-integration.cpp])
 AC_CONFIG_HEADERS([config.h])

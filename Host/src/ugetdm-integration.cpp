@@ -31,9 +31,6 @@
 #include <windows.h>
 #endif /* OS_WINDOWS */
 
-#define EXTENSION_ID "chrome-extension://ghleembdahcojlajccifpgffekcpgknk/"
-#define APPLICATION_NAME "uGet Integration"
-#define APPLICATION_VERSION "1.0"
 #define APPLICATION_KEY "application"
 #define PARAMETERS_KEY "parameters"
 
@@ -191,25 +188,25 @@ int main (int argc, const char* argv[])
 	{
 		if (strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "--version") == 0)
 		{
-			std::cout << APPLICATION_NAME << " " << APPLICATION_VERSION << std::endl << std::endl;
+			std::cout << PACKAGE_STRING << std::endl << std::endl;
 			std::cout
-			    << "Copyright (C) 2013 uGet Integration - Roque Pinel" << std::endl
+			    << "Copyright (C) 2013 " << PACKAGE_NAME << " - Roque Pinel" << std::endl
 				<< "Licensed under the Apache License, Version 2.0" << std::endl
 				<< "<http://www.apache.org/licenses/LICENSE-2.0>" << std::endl << std::endl
 				<< "Originally written by Roque Pinel." << std::endl;
-			std::cout << "Please refer to <https://github.com/repinel/uGetIntegration> for bug reports and questions." << std::endl;
+			std::cout << "Please refer to <" << PACKAGE_URL << "> for bug reports and questions." << std::endl;
 
 			exit(EXIT_SUCCESS);
 		}
 		else if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0)
 		{
-			std::cout << APPLICATION_NAME << " " << APPLICATION_VERSION << std::endl << std::endl;
+			std::cout << PACKAGE_STRING << std::endl << std::endl;
 			std::cout
 				<< "This application is to be used with the uGet Integration web browser extension." << std::endl << std::endl
 				<< "Additional options:" << std::endl
 				<< "-v,  --version\tdisplay the version and exit." << std::endl
 				<< "-h,  --help\tprint this help." << std::endl << std::endl;
-			std::cout << "Please refer to <https://github.com/repinel/uGetIntegration> for bug reports and questions." << std::endl;
+			std::cout << "Please refer to <" << PACKAGE_URL << "> for bug reports and questions." << std::endl;
 
 			exit(EXIT_SUCCESS);
 		}
