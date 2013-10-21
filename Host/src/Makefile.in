@@ -634,7 +634,7 @@ $(HOST_JSON_OUTPUT): $(HOST_JSON)
 			echo "sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration.exe|' < '$(srcdir)/$(HOST_JSON)' > '$(HOST_JSON_OUTPUT)'" ; \
 			sed -e 's|HOST_PATH|ugetdm-integration.exe|' < "$(srcdir)/$(HOST_JSON)" > "$(HOST_JSON_OUTPUT)" ;; \
 		*) \
-			echo "Your platform is not currently supported" ; exit 1 ;; \
+			echo "Your platform is not currently supported: $(host_os)" ; exit 1 ;; \
 	esac;
 
 install-binSCRIPTS: $(bin_SCRIPTS)
