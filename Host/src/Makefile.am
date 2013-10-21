@@ -20,19 +20,29 @@ bin_PROGRAMS = ugetdm-integration
 
 ugetdm_integration_SOURCES = ugetdm-integration.cpp
 
-bin_SCRIPTS = com.ugetdm.integration.json
+#
+# Host JSON
+#
 
-com.ugetdm.integration.json: com.ugetdm.integration.json.in
+HOST_JSON = com.ugetdm.integration.json.in
+HOST_JSON_OUTPUT = com.ugetdm.integration.json
+
+# necessary to export the file with the distribution
+EXTRA_DIST = $(HOST_JSON)
+
+bin_SCRIPTS = $(HOST_JSON_OUTPUT)
+
+$(HOST_JSON_OUTPUT): $(HOST_JSON)
 	@case "$(host_os)" in \
 		darwin*) \
-			echo "sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration|' < '$(srcdir)/com.ugetdm.integration.json.in' > com.ugetdm.integration.json" ; \
-			sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration|' < "$(srcdir)/com.ugetdm.integration.json.in" > com.ugetdm.integration.json ;; \
+			echo "sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration|' < '$(srcdir)/$(HOST_JSON)' > '$(HOST_JSON_OUTPUT)'" ; \
+			sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration|' < "$(srcdir)/$(HOST_JSON)" > "$(HOST_JSON_OUTPUT)" ;; \
 		linux) \
-			echo "sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration|' < '$(srcdir)/com.ugetdm.integration.json.in' > com.ugetdm.integration.json" ; \
-			sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration|' < $(srcdir)/com.ugetdm.integration.json.in > com.ugetdm.integration.json ;; \
+			echo "sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration|' < '$(srcdir)/$(HOST_JSON)' > '$(HOST_JSON_OUTPUT)'" ; \
+			sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration|' < "$(srcdir)/$(HOST_JSON)" > "$(HOST_JSON_OUTPUT)" ;; \
 		mingw32 | cygwin) \
-			echo "sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration.exe|' < '$(srcdir)/com.ugetdm.integration.json.in' > com.ugetdm.integration.json" ; \
-			sed -e 's|HOST_PATH|ugetdm-integration.exe|' < $(srcdir)/com.ugetdm.integration.json.in > com.ugetdm.integration.json ;; \
+			echo "sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration.exe|' < '$(srcdir)/$(HOST_JSON)' > '$(HOST_JSON_OUTPUT)'" ; \
+			sed -e 's|HOST_PATH|ugetdm-integration.exe|' < "$(srcdir)/$(HOST_JSON)" > "$(HOST_JSON_OUTPUT)" ;; \
 		*) \
 			echo "Your platform is not currently supported" ; exit 1 ;; \
 	esac;
@@ -50,7 +60,11 @@ install-binSCRIPTS: $(bin_SCRIPTS)
 	for json_dir in "$${JSON_DIRS[@]}"; do \
 		echo " $(MKDIR_P) '$$json_dir'"; \
 		$(MKDIR_P) "$$json_dir" || exit 1; \
-		echo " $(INSTALL_PROGRAM_ENV) $(INSTALL_PROGRAM) 'com.ugetdm.integration.json' '$$json_dir'"; \
-		$(INSTALL_SCRIPT_ENV) $(INSTALL_PROGRAM) "com.ugetdm.integration.json" "$$json_dir" || exit $$?; \
+		echo " $(INSTALL_PROGRAM_ENV) $(INSTALL_PROGRAM) '$(HOST_JSON_OUTPUT)' '$$json_dir'"; \
+		$(INSTALL_SCRIPT_ENV) $(INSTALL_PROGRAM) "$(HOST_JSON_OUTPUT)" "$$json_dir" || exit $$?; \
     done;
 
+clean-binSCRIPTS:
+	-test -z "$(bin_SCRIPTS)" || rm -f $(bin_SCRIPTS)
+
+clean-generic: clean-binSCRIPTS
