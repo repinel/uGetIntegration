@@ -302,6 +302,16 @@ ugetdm_integration_SOURCES = ugetdm-integration.cpp
 #
 HOST_JSON = com.ugetdm.integration.json.in
 HOST_JSON_OUTPUT = com.ugetdm.integration.json
+HOST_OS_JSON_DIRS = \
+	case "$(host_os)" in \
+		darwin*) \
+			JSON_DIRS=( '/Library/Google/Chrome/NativeMessagingHosts' ) ;; \
+		linux) \
+			JSON_DIRS=( '/etc/opt/chrome/native-messaging-hosts' '/etc/chromium/native-messaging-hosts' ) ;; \
+		*) \
+			echo "Your platform is not currently supported for installation" ; exit 1 ;; \
+	esac;
+
 
 # necessary to export the file with the distribution
 EXTRA_DIST = $(HOST_JSON)
@@ -386,13 +396,6 @@ clean-binPROGRAMS:
 ugetdm-integration$(EXEEXT): $(ugetdm_integration_OBJECTS) $(ugetdm_integration_DEPENDENCIES) $(EXTRA_ugetdm_integration_DEPENDENCIES) 
 	@rm -f ugetdm-integration$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(ugetdm_integration_OBJECTS) $(ugetdm_integration_LDADD) $(LIBS)
-
-uninstall-binSCRIPTS:
-	@$(NORMAL_UNINSTALL)
-	@list='$(bin_SCRIPTS)'; test -n "$(bindir)" || exit 0; \
-	files=`for p in $$list; do echo "$$p"; done | \
-	       sed -e 's,.*/,,;$(transform)'`; \
-	dir='$(DESTDIR)$(bindir)'; $(am__uninstall_files_from_dir)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -636,20 +639,23 @@ $(HOST_JSON_OUTPUT): $(HOST_JSON)
 
 install-binSCRIPTS: $(bin_SCRIPTS)
 	@$(NORMAL_INSTALL)
-	@case "$(host_os)" in \
-		darwin*) \
-			JSON_DIRS=( '/Library/Google/Chrome/NativeMessagingHosts' ) ;; \
-		linux) \
-			JSON_DIRS=( '/etc/opt/chrome/native-messaging-hosts' '/etc/chromium/native-messaging-hosts' ) ;; \
-		*) \
-			echo "Your platform is not currently supported for installation" ; exit 1 ;; \
-	esac; \
+	@$(HOST_OS_JSON_DIRS) \
 	for json_dir in "$${JSON_DIRS[@]}"; do \
 		echo " $(MKDIR_P) '$$json_dir'"; \
 		$(MKDIR_P) "$$json_dir" || exit 1; \
 		echo " $(INSTALL_PROGRAM_ENV) $(INSTALL_PROGRAM) '$(HOST_JSON_OUTPUT)' '$$json_dir'"; \
 		$(INSTALL_SCRIPT_ENV) $(INSTALL_PROGRAM) "$(HOST_JSON_OUTPUT)" "$$json_dir" || exit $$?; \
-    done;
+	done;
+
+uninstall-binSCRIPTS:
+	@$(NORMAL_UNINSTALL)
+	@$(HOST_OS_JSON_DIRS) \
+	list='$(bin_SCRIPTS)'; test -n "$(bindir)" || exit 0; \
+	files=`for p in $$list; do echo "$$p"; done | \
+			sed -e 's,.*/,,;$(transform)'`; \
+	for json_dir in "$${JSON_DIRS[@]}"; do \
+		dir="$$json_dir"; $(am__uninstall_files_from_dir) \
+	done;
 
 clean-binSCRIPTS:
 	-test -z "$(bin_SCRIPTS)" || rm -f $(bin_SCRIPTS)
