@@ -26,7 +26,7 @@ case $host_os in
 	darwin*)
 		AC_DEFINE([OS_MACOSX], [], [Using OS X])
 		;;
-	linux)
+	linux*)
 		AC_DEFINE([OS_LINUX], [], [Using Linux])
 		;;
 	mingw32 | cygwin)

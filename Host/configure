@@ -2928,7 +2928,7 @@ case $host_os in
 $as_echo "#define OS_MACOSX /**/" >>confdefs.h
 
 		;;
-	linux)
+	linux*)
 
 $as_echo "#define OS_LINUX /**/" >>confdefs.h
 
