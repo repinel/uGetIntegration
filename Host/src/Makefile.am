@@ -31,7 +31,7 @@ HOST_OS_JSON_DIRS = \
 	case "$(host_os)" in \
 		darwin*) \
 			JSON_DIRS=( '/Library/Google/Chrome/NativeMessagingHosts' ) ;; \
-		linux) \
+		linux*) \
 			JSON_DIRS=( '/etc/opt/chrome/native-messaging-hosts' '/etc/chromium/native-messaging-hosts' ) ;; \
 		*) \
 			echo "Your platform is not currently supported for installation" ; exit 1 ;; \
@@ -47,7 +47,7 @@ $(HOST_JSON_OUTPUT): $(HOST_JSON)
 		darwin*) \
 			echo "sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration|' < '$(srcdir)/$(HOST_JSON)' > '$(HOST_JSON_OUTPUT)'" ; \
 			sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration|' < "$(srcdir)/$(HOST_JSON)" > "$(HOST_JSON_OUTPUT)" ;; \
-		linux) \
+		linux*) \
 			echo "sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration|' < '$(srcdir)/$(HOST_JSON)' > '$(HOST_JSON_OUTPUT)'" ; \
 			sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration|' < "$(srcdir)/$(HOST_JSON)" > "$(HOST_JSON_OUTPUT)" ;; \
 		mingw32 | cygwin) \
