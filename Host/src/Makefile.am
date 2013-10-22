@@ -45,13 +45,13 @@ bin_SCRIPTS = $(HOST_JSON_OUTPUT)
 $(HOST_JSON_OUTPUT): $(HOST_JSON)
 	@case "$(host_os)" in \
 		darwin*) \
-			echo "sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration|' < '$(srcdir)/$(HOST_JSON)' > '$(HOST_JSON_OUTPUT)'" ; \
-			sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration|' < "$(srcdir)/$(HOST_JSON)" > "$(HOST_JSON_OUTPUT)" ;; \
+			echo "sed -e 's|HOST_PATH|'$(bindir)'\/ugetdm-integration|' < '$(srcdir)/$(HOST_JSON)' > '$(HOST_JSON_OUTPUT)'" ; \
+			sed -e 's|HOST_PATH|'$(bindir)'\/ugetdm-integration|' < "$(srcdir)/$(HOST_JSON)" > "$(HOST_JSON_OUTPUT)" ;; \
 		linux*) \
-			echo "sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration|' < '$(srcdir)/$(HOST_JSON)' > '$(HOST_JSON_OUTPUT)'" ; \
-			sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration|' < "$(srcdir)/$(HOST_JSON)" > "$(HOST_JSON_OUTPUT)" ;; \
+			echo "sed -e 's|HOST_PATH|'$(bindir)'\/ugetdm-integration|' < '$(srcdir)/$(HOST_JSON)' > '$(HOST_JSON_OUTPUT)'" ; \
+			sed -e 's|HOST_PATH|'$(bindir)'\/ugetdm-integration|' < "$(srcdir)/$(HOST_JSON)" > "$(HOST_JSON_OUTPUT)" ;; \
 		mingw32 | cygwin) \
-			echo "sed -e 's|HOST_PATH|'$(prefix)'\/ugetdm-integration.exe|' < '$(srcdir)/$(HOST_JSON)' > '$(HOST_JSON_OUTPUT)'" ; \
+			echo "sed -e 's|HOST_PATH|ugetdm-integration.exe|' < '$(srcdir)/$(HOST_JSON)' > '$(HOST_JSON_OUTPUT)'" ; \
 			sed -e 's|HOST_PATH|ugetdm-integration.exe|' < "$(srcdir)/$(HOST_JSON)" > "$(HOST_JSON_OUTPUT)" ;; \
 		*) \
 			echo "Your platform is not currently supported" ; exit 1 ;; \
