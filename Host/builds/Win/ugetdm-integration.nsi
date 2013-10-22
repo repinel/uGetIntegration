@@ -46,8 +46,8 @@ Section "uGetIntegration (required)"
   SetOutPath $INSTDIR
   
   ; Put file there
-  File ..\..\Source\ugetdm-integration.exe
-  File ..\..\Source\com.ugetdm.integration.json
+  File ..\..\src\ugetdm-integration.exe
+  File ..\..\src\com.ugetdm.integration.json
 
   ; Write the installation path into the registry
   WriteRegStr HKLM "SOFTWARE\uGetIntegration" "Install_Dir" "$INSTDIR"
