@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<installer-script minSpecVersion="1.000000" authoringTool="com.apple.PackageMaker" authoringToolVersion="3.0.6" authoringToolBuild="201">
+    <title>uGet Integration</title>
+    <options customize="allow" allow-external-scripts="no" rootVolumeOnly="true"/>
+    <choices-outline>
+        <line choice="choice0"/>
+        <line choice="choice1"/>
+    </choices-outline>
+    <choice id="choice0" title="ugetdm-integration">
+        <pkg-ref id="com.ugetdm.ugetIntegration.ugetdm-integration.pkg"/>
+    </choice>
+    <choice id="choice1" title="com.ugetdm.integration">
+        <pkg-ref id="com.ugetdm.ugetIntegration.com.ugetdm.integration.pkg"/>
+    </choice>
+    <pkg-ref id="com.ugetdm.ugetIntegration.ugetdm-integration.pkg" installKBytes="24" version="1.0" auth="Root">file:./Contents/Packages/ugetdmintegration.pkg</pkg-ref>
+    <pkg-ref id="com.ugetdm.ugetIntegration.com.ugetdm.integration.pkg" installKBytes="4" version="1.0" auth="Root">file:./Contents/Packages/comugetdmintegration.pkg</pkg-ref>
+</installer-script>
