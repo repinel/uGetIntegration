@@ -91,8 +91,14 @@ Options = {
 	restoreOptions: function() {
 		Options.getStorage().get(Options.getKeys(), function(items) {
 			for (var key in Options.values) {
-				var value = items[key] ? items[key] : Options.values[key];
 				var element = document.querySelector("#download_options #" + key);
+
+				if (!items[key]) {
+					items[key] = Options.values[key];
+					console.log(key + " default loaded: " + value);
+				}
+
+				var value = items[key];
 
 				if (element) {
 					if (Options.isCheckbox(element))
@@ -112,11 +118,10 @@ Options = {
 	// Events
 
 	onLoad: function() {
-		if(!document.querySelector("#download_options"))
-			return;
-
-		document.querySelector("#download_options #save").addEventListener("click", Options.saveOptions);
-		document.querySelector("#download_options #reset").addEventListener("click", Options.defaultOptions);
+		if (document.querySelector("#download_options")) {
+			document.querySelector("#download_options #save").addEventListener("click", Options.saveOptions);
+			document.querySelector("#download_options #reset").addEventListener("click", Options.defaultOptions);
+		}
 
 		Options.restoreOptions();
 	}
