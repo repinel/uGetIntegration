@@ -1,0 +1,53 @@
+			Installation Procedure
+
+0) Preparation
+
+To build and install the uGet Integration, you need to unpack the
+archive (which you have presumably done, since you are reading this),
+and read on. uGet Integration uses the GNU Autoconf mechanism for
+build and installation.
+
+1) Configuration
+
+To configure, run the configure script provided with the
+distribution.  You may use all the standard arguments configure
+scripts take.  The most important ones are:
+
+  --help                  print help message
+
+  --prefix=PREFIX         install architecture-independent files in PREFIX
+                          (/usr/local by default)
+  --bindir=DIR            user executables in DIR (PREFIX/bin)
+  
+  --build=BUILD           configure for building on BUILD [BUILD=HOST]
+  --host=HOST             configure for HOST [guessed]
+  --target=TARGET         configure for TARGET [TARGET=HOST]
+
+So, if you want to configure uGet Integration for installation in your home
+directory, you can type:
+./configure --prefix=$HOME
+
+To configure uGet Integration on Windows, use Cygwin to configure and compile.
+
+2) Compilation
+
+After the compilation, the `ugetdm-integration` executable should reside
+in the src directory. You can test it by running it with '--version'.
+
+3) Installation
+
+Use `make install' to install uGet Integration to directories specified to
+configure (/usr/local/* by default).
+
+The standard installation process will copy the wget binary to
+/usr/local/bin, and the host JSON file to the appropriated OS path.
+The JSON file path should not be changed since any change can affect
+how the browser find the executable.
+
+To delete the files created by the installation, you can use make
+uninstall.
+
+To install uGet Integration on Windows, the easiest way is to generate the
+installer using Nullsoft Scriptable Install System (NSIS) script located
+at 'builds/Win/ugetdm-integration.nsi'.
+
