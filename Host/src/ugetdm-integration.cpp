@@ -188,7 +188,13 @@ int main (int argc, const char* argv[])
 	{
 		if (strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "--version") == 0)
 		{
-			std::cout << PACKAGE_STRING << std::endl << std::endl;
+			std::cout
+				<< PACKAGE_STRING << std::endl
+#if defined DEBUG
+				<< "Debug Mode" << std::endl
+#endif /* DEBUG */
+				<< std::endl;
+
 			std::cout
 			    << "Copyright (C) 2013 " << PACKAGE_NAME << " - Roque Pinel" << std::endl
 				<< "Licensed under the Apache License, Version 2.0" << std::endl
@@ -200,7 +206,13 @@ int main (int argc, const char* argv[])
 		}
 		else if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0)
 		{
-			std::cout << PACKAGE_STRING << std::endl << std::endl;
+			std::cout
+				<< PACKAGE_STRING << std::endl
+#if defined DEBUG
+				<< "Debug Mode" << std::endl
+#endif /* DEBUG */
+				<< std::endl;
+
 			std::cout
 				<< "This application is to be used with the uGet Integration web browser extension." << std::endl << std::endl
 				<< "Additional options:" << std::endl
