@@ -68,10 +68,11 @@ Main = {
 		var message = chrome.runtime.lastError.message;
 		console.log("Failed to connect: " + message);
 
-		if (message == "Error when communicating with the native messaging host.")
+		if (message == "Error when communicating with the native messaging host."
+			|| message == "Native host has exited.")
 			return; // ignore
 
-		alert("Please install the uGet Integration host application.");
+		alert("Error calling the uGet Integration host application: " + message);
 	},
 
 	downloadLinkOnClick: function(info, tab) {
