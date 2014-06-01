@@ -33,7 +33,7 @@ ESCAPED_HOST_PATH=${HOST_PATH////\\/}
 for target_dir in "${TARGET_DIRS[@]}"
 do
     mkdir -p $target_dir
-    cp $DIR/${HOST_NAME}.json $target_dir
+    cp $DIR/${HOST_NAME}.json.in $target_dir/${HOST_NAME}.json
 
     sed -i -e "s/HOST_PATH/$ESCAPED_HOST_PATH/" ${target_dir}/${HOST_NAME}.json
 
