@@ -32,7 +32,7 @@ HOST_OS_JSON_DIRS = \
 		darwin*) \
 			JSON_DIRS=( '/Library/Google/Chrome/NativeMessagingHosts' ) ;; \
 		linux*) \
-			JSON_DIRS=( '/etc/opt/chrome/native-messaging-hosts' '/etc/chromium/native-messaging-hosts' ) ;; \
+			JSON_DIRS=( "$(DESTDIR)$(sysconfdir)/opt/chrome/native-messaging-hosts" "$(DESTDIR)$(sysconfdir)/chromium/native-messaging-hosts" ) ;; \
 		*) \
 			echo "Your platform is not currently supported for installation" ; exit 1 ;; \
 	esac;

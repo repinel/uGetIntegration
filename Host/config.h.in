@@ -42,9 +42,6 @@
 /* Using Windows */
 #undef OS_WINDOWS
 
-/* DEBUG Mode */
-#undef DEBUG
-
 /* Name of package */
 #undef PACKAGE
 
