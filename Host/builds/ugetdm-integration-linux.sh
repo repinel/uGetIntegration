@@ -5,7 +5,7 @@
   --fstrans=no \
   --reset-uids=yes \
   --pkgname="uget-integration" \
-  --pkgversion=1.0 \
+  --pkgversion=1.0.1 \
   --pkgrelease=1 \
   --pkggroup=utils \
   --arch=i386 \

@@ -6,7 +6,7 @@
 Name "uGet Integration"
 
 ; The file to write
-OutFile "uGetIntegration-v1.0.exe"
+OutFile "uGetIntegration-v1.0.1.exe"
 
 ; The default installation directory
 InstallDir "$PROGRAMFILES\uGetIntegration"
@@ -22,11 +22,11 @@ InstallDirRegKey HKLM "SOFTWARE\uGetIntegration" "Install_Dir"
 
 ;Version Information
 
-VIProductVersion "1.0.0.0"
+VIProductVersion "1.0.1.0"
 VIAddVersionKey "ProductName" "uGet Integration"
 VIAddVersionKey "LegalCopyright" "uGet Integration"
 VIAddVersionKey "FileDescription" "uGet Integration"
-VIAddVersionKey "FileVersion" "1.0.0.0"
+VIAddVersionKey "FileVersion" "1.0.1.0"
 
 ;--------------------------------
 

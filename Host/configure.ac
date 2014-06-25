@@ -15,7 +15,7 @@
 # limitations under the License.
 
 AC_PREREQ([2.69])
-AC_INIT(uGet Integration, 1.0, [], [uget-integration], [https://github.com/repinel/uGetIntegration])
+AC_INIT(uGet Integration, 1.0.1, [], [uget-integration], [https://github.com/repinel/uGetIntegration])
 AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([src/ugetdm-integration.cpp])
 AC_CONFIG_HEADERS([config.h])

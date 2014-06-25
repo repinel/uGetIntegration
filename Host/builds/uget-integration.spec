@@ -16,8 +16,8 @@
 #
 
 Name:           uget-integration
-Version:        1.0
-Release:        3%{?dist}
+Version:        1.0.1
+Release:        1%{?dist}
 License:        Apache License, Version 2.0
 Summary:        uGet Integration
 Url:            http://ugetdm.com
