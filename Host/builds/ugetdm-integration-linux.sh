@@ -14,5 +14,5 @@
   --nodoc \
   --backup=no
 
-fakeroot alien -r uget-integration_*-*_i386.deb
+#fakeroot alien -r uget-integration_*-*_i386.deb
 
