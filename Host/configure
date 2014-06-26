@@ -582,7 +582,7 @@ PACKAGE_STRING='uGet Integration 1.0.1'
 PACKAGE_BUGREPORT=''
 PACKAGE_URL='https://github.com/repinel/uGetIntegration'
 
-ac_unique_file="src/ugetdm-integration.cpp"
+ac_unique_file="src/uget-integration.cpp"
 # Factoring default headers for most tests.
 ac_includes_default="\
 #include <stdio.h>

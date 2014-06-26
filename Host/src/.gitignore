@@ -1,5 +1,5 @@
 .deps
-ugetdm-integration
-ugetdm-integration.exe
-ugetdm-integration.o
+uget-integration
+uget-integration.exe
+uget-integration.o
 com.ugetdm.integration.json

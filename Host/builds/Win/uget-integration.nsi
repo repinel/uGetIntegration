@@ -1,4 +1,4 @@
-; ugetdm-integration.nsi
+; uget-integration.nsi
 ;
 ; The uGet Integration NSIS script. It will install the host application
 ; that is used by the uGet Integration extension from Chromium based browsers.
@@ -46,7 +46,7 @@ Section "uGetIntegration (required)"
   SetOutPath $INSTDIR
   
   ; Put file there
-  File ..\..\src\ugetdm-integration.exe
+  File ..\..\src\uget-integration.exe
   File ..\..\src\com.ugetdm.integration.json
 
   ; Write the installation path into the registry
@@ -72,7 +72,7 @@ Section "Uninstall"
   DeleteRegKey HKLM "SOFTWARE\Google\Chrome\NativeMessagingHosts\com.ugetdm.integration"
 
   ; Remove files and uninstaller
-  Delete $INSTDIR\ugetdm-integration.exe
+  Delete $INSTDIR\uget-integration.exe
   Delete $INSTDIR\com.ugetdm.integration.json
   Delete $INSTDIR\uninstall.exe
 

@@ -25,7 +25,7 @@ else
 fi
 
 HOST_NAME=com.ugetdm.integration
-HOST_PATH=$DIR/ugetdm-integration
+HOST_PATH=$DIR/uget-integration
 
 # Update host path in the manifest.
 ESCAPED_HOST_PATH=${HOST_PATH////\\/}

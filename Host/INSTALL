@@ -31,7 +31,7 @@ To configure uGet Integration on Windows, use Cygwin to configure and compile.
 
 2) Compilation
 
-After the compilation, the `ugetdm-integration` executable should reside
+After the compilation, the `uget-integration` executable should reside
 in the src directory. You can test it by running it with '--version'.
 
 3) Installation
@@ -49,5 +49,5 @@ uninstall.
 
 To install uGet Integration on Windows, the easiest way is to generate the
 installer using Nullsoft Scriptable Install System (NSIS) script located
-at 'builds/Win/ugetdm-integration.nsi'.
+at 'builds/Win/uget-integration.nsi'.
 

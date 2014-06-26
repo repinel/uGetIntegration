@@ -20,7 +20,7 @@ Version:        1.0.1
 Release:        1%{?dist}
 License:        Apache License, Version 2.0
 Summary:        uGet Integration
-Url:            http://ugetdm.com
+Url:            https://github.com/repinel/uGetIntegration
 Group:          Applications/Internet
 Source:         uget-integration-%{version}.tar.gz
 #Patch:
@@ -48,7 +48,7 @@ make %{?_smp_mflags}
 %files
 %defattr(-,root,root)
 %doc README COPYING
-%{_bindir}/ugetdm-integration
+%{_bindir}/uget-integration
 %config %{_sysconfdir}/opt/chrome/native-messaging-hosts
 %config %{_sysconfdir}/chromium/native-messaging-hosts
 

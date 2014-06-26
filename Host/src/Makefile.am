@@ -16,9 +16,9 @@
 
 CFLAGS = --pedantic -Wall -std=c99 -O2
 
-bin_PROGRAMS = ugetdm-integration
+bin_PROGRAMS = uget-integration
 
-ugetdm_integration_SOURCES = ugetdm-integration.cpp
+uget_integration_SOURCES = uget-integration.cpp
 
 #
 # Host JSON
@@ -45,14 +45,14 @@ bin_SCRIPTS = $(HOST_JSON_OUTPUT)
 $(HOST_JSON_OUTPUT): $(HOST_JSON)
 	@case "$(host_os)" in \
 		darwin*) \
-			echo "sed -e 's|HOST_PATH|'$(bindir)'\/ugetdm-integration|' < '$(srcdir)/$(HOST_JSON)' > '$(HOST_JSON_OUTPUT)'" ; \
-			sed -e 's|HOST_PATH|'$(bindir)'\/ugetdm-integration|' < "$(srcdir)/$(HOST_JSON)" > "$(HOST_JSON_OUTPUT)" ;; \
+			echo "sed -e 's|HOST_PATH|'$(bindir)'\/uget-integration|' < '$(srcdir)/$(HOST_JSON)' > '$(HOST_JSON_OUTPUT)'" ; \
+			sed -e 's|HOST_PATH|'$(bindir)'\/uget-integration|' < "$(srcdir)/$(HOST_JSON)" > "$(HOST_JSON_OUTPUT)" ;; \
 		linux*) \
-			echo "sed -e 's|HOST_PATH|'$(bindir)'\/ugetdm-integration|' < '$(srcdir)/$(HOST_JSON)' > '$(HOST_JSON_OUTPUT)'" ; \
-			sed -e 's|HOST_PATH|'$(bindir)'\/ugetdm-integration|' < "$(srcdir)/$(HOST_JSON)" > "$(HOST_JSON_OUTPUT)" ;; \
+			echo "sed -e 's|HOST_PATH|'$(bindir)'\/uget-integration|' < '$(srcdir)/$(HOST_JSON)' > '$(HOST_JSON_OUTPUT)'" ; \
+			sed -e 's|HOST_PATH|'$(bindir)'\/uget-integration|' < "$(srcdir)/$(HOST_JSON)" > "$(HOST_JSON_OUTPUT)" ;; \
 		mingw32 | cygwin) \
-			echo "sed -e 's|HOST_PATH|ugetdm-integration.exe|' < '$(srcdir)/$(HOST_JSON)' > '$(HOST_JSON_OUTPUT)'" ; \
-			sed -e 's|HOST_PATH|ugetdm-integration.exe|' < "$(srcdir)/$(HOST_JSON)" > "$(HOST_JSON_OUTPUT)" ;; \
+			echo "sed -e 's|HOST_PATH|uget-integration.exe|' < '$(srcdir)/$(HOST_JSON)' > '$(HOST_JSON_OUTPUT)'" ; \
+			sed -e 's|HOST_PATH|uget-integration.exe|' < "$(srcdir)/$(HOST_JSON)" > "$(HOST_JSON_OUTPUT)" ;; \
 		*) \
 			echo "Your platform is not currently supported" ; exit 1 ;; \
 	esac;

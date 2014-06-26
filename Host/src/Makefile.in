@@ -95,7 +95,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-bin_PROGRAMS = ugetdm-integration$(EXEEXT)
+bin_PROGRAMS = uget-integration$(EXEEXT)
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/depcomp
@@ -109,9 +109,9 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_ugetdm_integration_OBJECTS = ugetdm-integration.$(OBJEXT)
-ugetdm_integration_OBJECTS = $(am_ugetdm_integration_OBJECTS)
-ugetdm_integration_LDADD = $(LDADD)
+am_uget_integration_OBJECTS = uget-integration.$(OBJEXT)
+uget_integration_OBJECTS = $(am_uget_integration_OBJECTS)
+uget_integration_LDADD = $(LDADD)
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
     $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
@@ -169,8 +169,8 @@ AM_V_CXXLD = $(am__v_CXXLD_@AM_V@)
 am__v_CXXLD_ = $(am__v_CXXLD_@AM_DEFAULT_V@)
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
-SOURCES = $(ugetdm_integration_SOURCES)
-DIST_SOURCES = $(ugetdm_integration_SOURCES)
+SOURCES = $(uget_integration_SOURCES)
+DIST_SOURCES = $(uget_integration_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -295,7 +295,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-ugetdm_integration_SOURCES = ugetdm-integration.cpp
+uget_integration_SOURCES = uget-integration.cpp
 
 #
 # Host JSON
@@ -393,9 +393,9 @@ uninstall-binPROGRAMS:
 clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
 
-ugetdm-integration$(EXEEXT): $(ugetdm_integration_OBJECTS) $(ugetdm_integration_DEPENDENCIES) $(EXTRA_ugetdm_integration_DEPENDENCIES) 
-	@rm -f ugetdm-integration$(EXEEXT)
-	$(AM_V_CXXLD)$(CXXLINK) $(ugetdm_integration_OBJECTS) $(ugetdm_integration_LDADD) $(LIBS)
+uget-integration$(EXEEXT): $(uget_integration_OBJECTS) $(uget_integration_DEPENDENCIES) $(EXTRA_uget_integration_DEPENDENCIES) 
+	@rm -f uget-integration$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(uget_integration_OBJECTS) $(uget_integration_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -403,7 +403,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ugetdm-integration.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/uget-integration.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -625,14 +625,14 @@ uninstall-am: uninstall-binPROGRAMS uninstall-binSCRIPTS
 $(HOST_JSON_OUTPUT): $(HOST_JSON)
 	@case "$(host_os)" in \
 		darwin*) \
-			echo "sed -e 's|HOST_PATH|'$(bindir)'\/ugetdm-integration|' < '$(srcdir)/$(HOST_JSON)' > '$(HOST_JSON_OUTPUT)'" ; \
-			sed -e 's|HOST_PATH|'$(bindir)'\/ugetdm-integration|' < "$(srcdir)/$(HOST_JSON)" > "$(HOST_JSON_OUTPUT)" ;; \
+			echo "sed -e 's|HOST_PATH|'$(bindir)'\/uget-integration|' < '$(srcdir)/$(HOST_JSON)' > '$(HOST_JSON_OUTPUT)'" ; \
+			sed -e 's|HOST_PATH|'$(bindir)'\/uget-integration|' < "$(srcdir)/$(HOST_JSON)" > "$(HOST_JSON_OUTPUT)" ;; \
 		linux*) \
-			echo "sed -e 's|HOST_PATH|'$(bindir)'\/ugetdm-integration|' < '$(srcdir)/$(HOST_JSON)' > '$(HOST_JSON_OUTPUT)'" ; \
-			sed -e 's|HOST_PATH|'$(bindir)'\/ugetdm-integration|' < "$(srcdir)/$(HOST_JSON)" > "$(HOST_JSON_OUTPUT)" ;; \
+			echo "sed -e 's|HOST_PATH|'$(bindir)'\/uget-integration|' < '$(srcdir)/$(HOST_JSON)' > '$(HOST_JSON_OUTPUT)'" ; \
+			sed -e 's|HOST_PATH|'$(bindir)'\/uget-integration|' < "$(srcdir)/$(HOST_JSON)" > "$(HOST_JSON_OUTPUT)" ;; \
 		mingw32 | cygwin) \
-			echo "sed -e 's|HOST_PATH|ugetdm-integration.exe|' < '$(srcdir)/$(HOST_JSON)' > '$(HOST_JSON_OUTPUT)'" ; \
-			sed -e 's|HOST_PATH|ugetdm-integration.exe|' < "$(srcdir)/$(HOST_JSON)" > "$(HOST_JSON_OUTPUT)" ;; \
+			echo "sed -e 's|HOST_PATH|uget-integration.exe|' < '$(srcdir)/$(HOST_JSON)' > '$(HOST_JSON_OUTPUT)'" ; \
+			sed -e 's|HOST_PATH|uget-integration.exe|' < "$(srcdir)/$(HOST_JSON)" > "$(HOST_JSON_OUTPUT)" ;; \
 		*) \
 			echo "Your platform is not currently supported" ; exit 1 ;; \
 	esac;
