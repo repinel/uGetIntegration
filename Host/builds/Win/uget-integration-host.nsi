@@ -6,7 +6,7 @@
 Name "uGet Integration Host"
 
 ; The file to write
-OutFile "uget-integration-host-v1.0.1.exe"
+OutFile "uget-integration-host-v1.0.2.exe"
 
 ; The default installation directory
 InstallDir "$PROGRAMFILES\uGetIntegrationHost"
@@ -22,11 +22,11 @@ InstallDirRegKey HKLM "SOFTWARE\uGetIntegrationHost" "Install_Dir"
 
 ;Version Information
 
-VIProductVersion "1.0.1.0"
+VIProductVersion "1.0.2.0"
 VIAddVersionKey "ProductName" "uGet Integration Host"
 VIAddVersionKey "LegalCopyright" "uGet Integration Host"
 VIAddVersionKey "FileDescription" "uGet Integration Host"
-VIAddVersionKey "FileVersion" "1.0.1.0"
+VIAddVersionKey "FileVersion" "1.0.2.0"
 
 ;--------------------------------
 
