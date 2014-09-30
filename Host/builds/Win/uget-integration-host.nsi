@@ -6,7 +6,7 @@
 Name "uGet Integration Host"
 
 ; The file to write
-OutFile "uget-integration-host-v1.0.2.exe"
+OutFile "uget-integration-host_1.0.2.exe"
 
 ; The default installation directory
 InstallDir "$PROGRAMFILES\uGetIntegrationHost"
