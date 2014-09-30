@@ -5,7 +5,7 @@ rm -vRf autom4te.cache
 
 rm -vf *~
 
-rm -vf uget-integration-*.tar.gz uget-integration-*.deb uget-integration-*.rpm
+rm -vf uget-integration-host-*.tar.gz uget-integration-host-*.deb uget-integration-host-*.rpm
 
 rm -vRf src/.deps
-rm -vf src/Makefile src/uget-integration src/uget-integration.exe src/uget-integration.o src/com.ugetdm.integration.json
+rm -vf src/Makefile src/uget-integration-host src/uget-integration-host.exe src/uget-integration-host.o src/com.ugetdm.integration.json

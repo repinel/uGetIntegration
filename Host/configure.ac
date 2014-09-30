@@ -15,9 +15,9 @@
 # limitations under the License.
 
 AC_PREREQ([2.69])
-AC_INIT(uGet Integration, 1.0.1, [], [uget-integration], [https://github.com/repinel/uGetIntegration])
+AC_INIT(uGet Integration Host, 1.0.2, [], [uget-integration-host], [https://github.com/repinel/uGetIntegration])
 AM_INIT_AUTOMAKE
-AC_CONFIG_SRCDIR([src/uget-integration.cpp])
+AC_CONFIG_SRCDIR([src/uget-integration-host.cpp])
 AC_CONFIG_HEADERS([config.h])
 
 # Check the host OS

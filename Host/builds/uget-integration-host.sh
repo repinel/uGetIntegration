@@ -4,7 +4,7 @@
   --install=no \
   --fstrans=no \
   --reset-uids=yes \
-  --pkgname="uget-integration" \
+  --pkgname="uget-integration-host" \
   --pkgversion=1.0.1 \
   --pkgrelease=1 \
   --pkggroup=utils \
@@ -14,5 +14,5 @@
   --nodoc \
   --backup=no
 
-#fakeroot alien -r uget-integration_*-*_i386.deb
+#fakeroot alien -r uget-integration-host_*-*_i386.deb
 

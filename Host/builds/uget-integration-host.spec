@@ -1,5 +1,5 @@
 #
-# spec file for package 
+# spec file for package
 #
 # Copyright (c) 2014 SUSE LINUX Products GmbH, Nuernberg, Germany.
 #
@@ -15,14 +15,14 @@
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
-Name:           uget-integration
+Name:           uget-integration-host
 Version:        1.0.1
 Release:        1%{?dist}
 License:        Apache License, Version 2.0
 Summary:        uGet Integration
 Url:            https://github.com/repinel/uGetIntegration
 Group:          Applications/Internet
-Source:         uget-integration-%{version}.tar.gz
+Source:         uget-integration-host-%{version}.tar.gz
 #Patch:
 BuildRequires:  gcc-c++, automake
 #PreReq:
@@ -48,7 +48,7 @@ make %{?_smp_mflags}
 %files
 %defattr(-,root,root)
 %doc README COPYING
-%{_bindir}/uget-integration
+%{_bindir}/uget-integration-host
 %config %{_sysconfdir}/opt/chrome/native-messaging-hosts
 %config %{_sysconfdir}/chromium/native-messaging-hosts
 
