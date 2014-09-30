@@ -16,10 +16,10 @@
 #
 
 Name:           uget-integration-host
-Version:        1.0.1
+Version:        1.0.2
 Release:        1%{?dist}
 License:        Apache License, Version 2.0
-Summary:        uGet Integration
+Summary:        uGet Integration Host
 Url:            https://github.com/repinel/uGetIntegration
 Group:          Applications/Internet
 Source:         uget-integration-host-%{version}.tar.gz
