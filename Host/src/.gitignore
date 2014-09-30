@@ -1,5 +1,5 @@
 .deps
-uget-integration
-uget-integration.exe
-uget-integration.o
+uget-integration-host
+uget-integration-host.exe
+uget-integration-host.o
 com.ugetdm.integration.json
