@@ -1,7 +1,7 @@
 {
 	"name": "uGet Integration",
 	"description": "Integrate your Chromium-based browser with the uGet Download Manager. Available for the Linux and Windows versions of uGet.",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"manifest_version": 2,
 
 	"homepage_url": "http://ugetdm.com",
@@ -24,7 +24,8 @@
 
 	"icons": {
 		"32": "uGet_32.png",
-		"48": "uGet_48.png"
+		"48": "uGet_48.png",
+		"128": "uGet_128.png"
 	}
 }
 
