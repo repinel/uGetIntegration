@@ -1,7 +1,7 @@
 {
 	"name": "uGet Integration",
-	"description": "Sends a link or group of links to the uGet download manager. uGet and this extensions are compatible with Linux & Windows.",
-	"version": "1.0.5",
+	"description": "Integrate your Chromium-based browser with the uGet Download Manager. Available for the Linux and Windows versions of uGet.",
+	"version": "1.0.6",
 	"manifest_version": 2,
 
 	"homepage_url": "http://ugetdm.com",

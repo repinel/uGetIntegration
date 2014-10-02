@@ -118,6 +118,14 @@ Options = {
 	// Events
 
 	onLoad: function() {
+		// app info
+		if (document.querySelector("#uget")) {
+			var details = chrome.app.getDetails();
+			document.querySelector("#uget #name").textContent = details.name;
+			document.querySelector("#uget #version").textContent = details.version;
+		}
+
+		// listeners
 		if (document.querySelector("#download_options")) {
 			document.querySelector("#download_options #save").addEventListener("click", Options.saveOptions);
 			document.querySelector("#download_options #reset").addEventListener("click", Options.defaultOptions);
